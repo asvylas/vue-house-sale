@@ -10,9 +10,15 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 // Routes
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     res.send({
         message: "Goodbye cruel wurld"
+    })
+})
+app.post('/register', (req, res) => {
+    res.send({
+        success: true,
+        message: 'User registered with email: ' + req.body.email
     })
 })
 // Starting server
