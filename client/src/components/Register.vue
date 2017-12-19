@@ -11,14 +11,12 @@
             <v-text-field
               name="input-1"
               label="Email"
-              id="testing"
               type="text"
               v-model="email"
             ></v-text-field>
             <v-text-field
               name="input-1"
               label="Password"
-              id="testing"
               type="password"
               v-model="password"
             ></v-text-field>
