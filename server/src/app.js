@@ -10,7 +10,7 @@ const config = require('./config/config')
 // Express
 const app = express()
 // Middleware
-app.use(morgan('combined'))
+app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(cors())
 // Routesc
