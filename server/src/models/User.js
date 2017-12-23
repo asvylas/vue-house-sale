@@ -1,13 +1,13 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 function hashPassword(user, options) {
-  const SALT_FACTOR = 8
 
   return bcrypt
-  .hash(user.password, SALT_FACTOR)
-  .then(function(hash) {
-    user.setDataValue('password', hash)
-});
+    .genSalt(10)
+    .then(salt => bcrypt.hash(user.password, salt, null))
+    .then(hash => {
+      user.setDataValue('password', hash)
+    })
 }
 
 module.exports = (sequelize, DataTypes) => {
@@ -20,17 +20,16 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       beforeCreate: hashPassword,
-      beforeUpdate: hashPassword,
-      beforeSave: hashPassword
+      beforeUpdate: hashPassword
     }
   })
 
-  User.prototype.comparePassword =  function (password) {
-    
-    return bcrypt.compare(password, this.password)
-    .then(function(res) {
-      console.log(this.password )
-  })
+  User.prototype.comparePassword = function (password) {
+    return bcrypt
+      .compare(password, this.password)
+      .then((res) => {
+        return res
+      });
   }
 
   return User

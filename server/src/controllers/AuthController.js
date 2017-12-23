@@ -43,15 +43,19 @@ module.exports = {
       }
 
       const checkPassword = await user.comparePassword(password)
-      if (!checkPassword) {
-        res.status(403).send({
-          error: 'Invalid password'
+      console.log(typeof checkPassword, checkPassword)
+      if (checkPassword == false) {
+        return res.status(403).send({
+          error: 'Invalid password',
         })
       }
 
       const resUser = user.toJSON()
       res.send({
-        user: resUser,
+        user: {
+          id: resUser.id,
+          email: resUser.email
+        },
         token: jwtSignUser(resUser)
       })
 
