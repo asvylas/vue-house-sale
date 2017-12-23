@@ -8,7 +8,7 @@
     <v-text-field hide-details single-line></v-text-field>
     <v-btn icon><v-icon>search</v-icon>
     </v-btn>
-     <router-link to="">
+     <router-link to="Login">
       <v-btn dark flat>Login</v-btn>
     </router-link>
     <router-link dark to="Register">

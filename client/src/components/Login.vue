@@ -4,7 +4,7 @@
       <div class="white elevation-2">
         <v-toolbar flat dark dense class="primary">
           <v-toolbar-title>
-            Register
+            Login
           </v-toolbar-title>
         </v-toolbar>
           <div class="pl-4 pr-4 pt-2 pb-2">
@@ -20,7 +20,7 @@
               type="password"
               v-model="password"
             ></v-text-field>
-        <v-btn color="primary" @click="registerUser">Submit</v-btn>
+        <v-btn color="primary" @click="loginUser">Login</v-btn>
         </div>
         </div>
     </v-flex>
@@ -30,7 +30,7 @@
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 export default {
-  name: 'Register',
+  name: 'Login',
   data () {
     return {
       msg: null,
@@ -40,13 +40,13 @@ export default {
     }
   },
   methods: {
-      async registerUser(){
+          async loginUser(){
         try {
-          await AuthenticationService.register({
+          await AuthenticationService.login({
             email: this.email,
             password: this.password
           })
-          this.msg = 'Registration successful'
+          this.msg = 'Login successful'
         } catch (error) {
           this.error = error.response.data.error
         }
