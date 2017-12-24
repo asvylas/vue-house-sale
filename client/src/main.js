@@ -6,6 +6,8 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import Vuex from 'vuex'
+import store from '@/store/store'
+import { sync } from 'vuex-router-sync'
 
 Vue.config.productionTip = false
 Vue.use(Vuetify, {
@@ -20,21 +22,12 @@ Vue.use(Vuetify, {
   }
 })
 
-Vue.use(Vuex)
-const store = new Vuex.Store({
-  state: {
-    count: 0
-  },
-  mutations: {
-    increment (state) {
-      state.count++
-    }
-  }
-})
+sync(store, router)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   template: '<App/>',
   components: { App }

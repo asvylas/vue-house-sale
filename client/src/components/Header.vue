@@ -6,13 +6,24 @@
     </router-link>
     <v-spacer></v-spacer>
     <v-text-field hide-details single-line></v-text-field>
-    <v-btn icon><v-icon>search</v-icon>
-    </v-btn>
+    <v-btn icon><v-icon>search</v-icon></v-btn>
      <router-link to="Login">
-      <v-btn dark flat>Login</v-btn>
+      <v-btn 
+      v-if="!$store.state.userLoggedIn"
+      dark
+      flat>Login</v-btn>
     </router-link>
     <router-link dark to="Register">
-      <v-btn flat dark>Register</v-btn>
+      <v-btn 
+      v-if="!$store.state.userLoggedIn"
+      flat 
+      dark>Register</v-btn>
+    </router-link>
+    <router-link dark to="Logout">
+      <v-btn 
+      v-if="$store.state.userLoggedIn"
+      flat 
+      dark>Logout</v-btn>
     </router-link>
   </v-toolbar>
 </template>

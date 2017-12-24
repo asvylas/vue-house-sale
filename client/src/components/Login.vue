@@ -20,8 +20,9 @@
               type="password"
               v-model="password"
             ></v-text-field>
-        <v-btn color="primary" @click="loginUser">Login</v-btn>
-        </div>
+            <v-btn color="primary" @click="loginUser">Login</v-btn>
+          </div>
+          <p></p>
         </div>
     </v-flex>
   </v-layout>
@@ -42,11 +43,12 @@ export default {
   methods: {
           async loginUser(){
         try {
-          await AuthenticationService.login({
+          const response = await AuthenticationService.login({
             email: this.email,
             password: this.password
           })
-          this.msg = 'Login successful'
+          this.$store.dispatch('setToken', response.data.token)
+          this.$store.dispatch('setUser', response.data.user)
         } catch (error) {
           this.error = error.response.data.error
         }
