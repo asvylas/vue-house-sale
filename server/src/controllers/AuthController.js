@@ -43,7 +43,6 @@ module.exports = {
       }
 
       const checkPassword = await user.comparePassword(password)
-      console.log(typeof checkPassword, checkPassword)
       if (checkPassword == false) {
         return res.status(403).send({
           error: 'Invalid password',
