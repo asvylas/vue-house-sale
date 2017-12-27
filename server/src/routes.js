@@ -14,10 +14,9 @@ module.exports = (app) => {
   app.post('/login',
     AuthController.login)
 
-
-  
   app.post('/properties',
     Properties.addProperty)
+    
   app.get('/properties',
     Properties.listAll)
 }

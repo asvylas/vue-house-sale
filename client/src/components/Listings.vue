@@ -1,16 +1,31 @@
 <template>
      <v-layout column>
     <v-flex xs12 sm6 offset-sm3>
+
+      <v-toolbar color="primary" dark>
+        <v-toolbar-title>Current Listings</v-toolbar-title>
+        <v-spacer></v-spacer>
+
+        <router-link to="newlisting">
+          <v-tooltip top>
+            <v-btn dark color="primary" slot="activator" icon>
+              <v-icon>add</v-icon></v-btn>
+            <span>Add a new listing</span>
+          </v-tooltip>
+        </router-link>
+      </v-toolbar>
+
       <v-container fluid grid-list-md class="grey lighten-4">
         <v-layout row wrap>
           <v-flex
             v-for="property in listings"
             :key="property.id"
           >
-          <v-card>{{property.id}}</v-card>
+          <v-card>{{property}}</v-card>
           </v-flex>
         </v-layout>
       </v-container>
+
     </v-flex>
   </v-layout>
 </template>
@@ -31,7 +46,7 @@ export default {
     async getProperties (){
             const response = await AuthenticationService.fetchProperties()
             this.listings = response.data.property
-        },
+        }
   }
 }
 </script>

@@ -4,6 +4,7 @@ import Index from '@/components/Index'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Listings from '@/components/Listings'
+import ListingForm from '@/components/ListingForm'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/listings',
       name:'Listings',
       component: Listings
+    },
+    {
+      path: '/newlisting',
+      name:'ListingForm',
+      component: ListingForm
     }
   ]
 })

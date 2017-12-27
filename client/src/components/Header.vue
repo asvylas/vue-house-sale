@@ -1,7 +1,5 @@
 <template>
   <v-toolbar dark dense color="primary">
-    <v-toolbar-side-icon>
-    </v-toolbar-side-icon>
     <router-link to="/">
       <v-toolbar-title dark class="white--text">Housefinder!</v-toolbar-title>
     </router-link>

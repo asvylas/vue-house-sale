@@ -9,5 +9,8 @@ export default {
   },
   fetchProperties() {
     return Api().get('properties')
+  },
+  addProperty() {
+    return Api().post('properties', property)
   }
 }
