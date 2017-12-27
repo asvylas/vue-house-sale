@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
+import Listings from '@/components/Listings'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/login',
       name:'Login',
       component: Login
+    },
+    {
+      path: '/listings',
+      name:'Listings',
+      component: Listings
     }
   ]
 })

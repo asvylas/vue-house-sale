@@ -21,8 +21,8 @@
               v-model="password"
             ></v-text-field>
             <v-btn color="primary" @click="loginUser">Login</v-btn>
+            <p>{{msg}}</p>
           </div>
-          <p></p>
         </div>
     </v-flex>
   </v-layout>
@@ -36,8 +36,7 @@ export default {
     return {
       msg: null,
       email: '',
-      password: '',
-      error: null
+      password: ''
     }
   },
   methods: {
@@ -50,7 +49,7 @@ export default {
           this.$store.dispatch('setToken', response.data.token)
           this.$store.dispatch('setUser', response.data.user)
         } catch (error) {
-          this.error = error.response.data.error
+          this.msg = error.response.data.error
         }
       }
   }

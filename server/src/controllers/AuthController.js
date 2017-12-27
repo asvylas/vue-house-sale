@@ -17,10 +17,12 @@ module.exports = {
 
     try {
       const user = await User.create(req.body)
-      res.send(user.toJSON())
+      res.send({
+        msg: 'Registration successful'
+      })
     } catch (err) {
       res.status(400).send({
-        error: 'This email account is already in use.'
+        msg: 'This email account is already in use.'
       })
     }
   },

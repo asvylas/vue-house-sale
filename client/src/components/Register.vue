@@ -21,6 +21,7 @@
               v-model="password"
             ></v-text-field>
         <v-btn color="primary" @click="registerUser">Submit</v-btn>
+        <p>{{msg}}</p>
         </div>
         </div>
     </v-flex>
@@ -35,20 +36,19 @@ export default {
     return {
       msg: null,
       email: '',
-      password: '',
-      error: null
+      password: ''
     }
   },
   methods: {
       async registerUser(){
         try {
-          await AuthenticationService.register({
+          const response = await AuthenticationService.register({
             email: this.email,
             password: this.password
           })
-          this.msg = 'Registration successful'
+          this.msg = response.data.msg
         } catch (error) {
-          this.error = error.response.data.error
+          this.msg = error.response.data.error
         }
       }
   }

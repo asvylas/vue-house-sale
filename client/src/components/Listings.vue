@@ -1,0 +1,28 @@
+<template>
+  
+</template>
+
+<script>
+import AuthenticationService from '@/services/AuthenticationService'
+export default {
+  name: 'Listings',
+  data () {
+    return {
+      listings: null
+    }
+  },
+  mounted(){
+        this.getProperties ()
+    },
+  methods: {
+    async getProperties (){
+            const response = await AuthenticationService.fetchProperties()
+        },
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+
+</style>
