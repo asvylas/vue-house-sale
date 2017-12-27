@@ -1,5 +1,9 @@
 <template>
-  
+  <v-layout column>
+    <v-flex xs6 offset-xs3>
+      <p v-for="property in listings">{{property}}</p>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -17,6 +21,7 @@ export default {
   methods: {
     async getProperties (){
             const response = await AuthenticationService.fetchProperties()
+            this.listings = response.data.property
         },
   }
 }

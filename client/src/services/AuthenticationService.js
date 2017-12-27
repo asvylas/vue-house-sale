@@ -8,6 +8,6 @@ export default {
     return Api().post('login', credentials)
   },
   fetchProperties() {
-    return Api().get('properties', options)
+    return Api().get('properties')
   }
 }

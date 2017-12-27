@@ -1,7 +1,7 @@
 const AuthController = require('./controllers/AuthController')
 const ListDB = require('./controllers/ListDB')
 const AuthControlPolicy = require('./policies/AuthControlPolicy')
-const ListProperties = require('./controllers/ListProperties')
+const Properties = require('./controllers/Properties')
 
 module.exports = (app) => {
 
@@ -14,6 +14,10 @@ module.exports = (app) => {
   app.post('/login',
     AuthController.login)
 
+
+  
+  app.post('/properties',
+    Properties.addProperty)
   app.get('/properties',
-    ListProperties.all)
+    Properties.listAll)
 }
