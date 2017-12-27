@@ -1,7 +1,16 @@
 <template>
-  <v-layout column>
-    <v-flex xs6 offset-xs3>
-      <p v-for="property in listings">{{property}}</p>
+     <v-layout column>
+    <v-flex xs12 sm6 offset-sm3>
+      <v-container fluid grid-list-md class="grey lighten-4">
+        <v-layout row wrap>
+          <v-flex
+            v-for="property in listings"
+            :key="property.id"
+          >
+          <v-card>{{property.id}}</v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-flex>
   </v-layout>
 </template>
