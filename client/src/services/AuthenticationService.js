@@ -10,7 +10,7 @@ export default {
   fetchProperties() {
     return Api().get('properties')
   },
-  addProperty() {
+  addProperty(property) {
     return Api().post('properties', property)
   }
 }

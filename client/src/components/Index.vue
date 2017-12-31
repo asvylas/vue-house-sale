@@ -1,19 +1,15 @@
 <template>
-
 </template>
 
 <script>
-export default {
-  name: 'Index',
-  data () {
-    return {
-
+ export default {
+    data: () => ({
+      drawer: null
+    }),
+    props: {
+      source: String
     }
-  },
-  methods: {
-
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

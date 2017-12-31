@@ -62,12 +62,12 @@ export default {
     async addNewListing (){
       try {
       const response = await AuthenticationService.addProperty({
-        name: this.name,
+        name_of_listing: this.name,
         city: this.city,
         address: this.address,
-        zip: this.zipcode,
-        type: this.type,
-        liste: "Fake user"
+        zip_code: this.zipcode,
+        type_of_building: this.type,
+        listed_by_user: "Fake user"
       })
       } catch (error) {
       }

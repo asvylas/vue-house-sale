@@ -19,7 +19,7 @@ module.exports = {
   async listAll(req, res) {
     try {
       const allProperties = await Property.findAll({
-        limit: 10
+        limit: 50
       })
       res.send({
         msg: 'All properties',

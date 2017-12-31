@@ -1,5 +1,6 @@
 <template>
   <v-toolbar dark dense color="primary">
+    <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     <router-link to="/">
       <v-toolbar-title dark class="white--text">Housefinder!</v-toolbar-title>
     </router-link>
@@ -39,8 +40,12 @@ export default {
   name: 'Header',
   data () {
     return {
+      drawer: null
     }
   },
+  props: {
+      source: String
+    },
   methods: {
     async logoutUser(){
       this.$store.dispatch('logoutUser')

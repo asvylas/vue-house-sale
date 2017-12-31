@@ -21,7 +21,14 @@
             v-for="property in listings"
             :key="property.id"
           >
-          <v-card>{{property}}</v-card>
+          <v-card>
+            <div>Pavadinimas: {{property.name_of_listing}}</div>
+            <div>Miestas: {{property.city}}</div>
+            <div>Adresas: {{property.address}}</div>
+            <div>Zip kodas: {{property.zip_code}}</div>
+            <div>Pastato tipas: {{property.type_of_building}}</div>
+            <div>Vartotojas: {{property.listed_by_user}}</div>
+          </v-card>
           </v-flex>
         </v-layout>
       </v-container>
