@@ -5,7 +5,6 @@ const Properties = require('./controllers/Properties')
 const Search = require('./controllers/Search')
 
 module.exports = (app) => {
-
   app.get('/', ListDB.list)
 
   app.post('/register',
@@ -17,9 +16,12 @@ module.exports = (app) => {
 
   app.post('/properties',
     Properties.addProperty)
-    
+
   app.get('/properties',
     Properties.listAll)
+
+  app.post('/propertiesbyid',
+    Properties.findPropertyById)
 
   app.post('/searchProperties',
     Search.searchProperties)

@@ -1,13 +1,16 @@
 import Api from '@/services/Api'
 
 export default {
-  fetchProperties() {
+  fetchProperties () {
     return Api().get('properties')
   },
-  addProperty(property) {
+  addProperty (property) {
     return Api().post('properties', property)
   },
-  searchProperties(options){
+  searchProperties (options) {
     return Api().post('searchProperties', options)
+  },
+  fetchById (id) {
+    return Api().post('propertiesbyid', id)
   }
 }

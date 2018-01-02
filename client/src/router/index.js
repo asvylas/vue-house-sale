@@ -5,6 +5,7 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Listings from '@/components/Listings'
 import ListingForm from '@/components/ListingForm'
+import PropertyId from '@/components/PropertyId'
 
 Vue.use(Router)
 
@@ -13,27 +14,32 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name:'Index',
+      name: 'Index',
       component: Index
     },
     {
       path: '/register',
-      name:'Register',
+      name: 'Register',
       component: Register
     },
     {
       path: '/login',
-      name:'Login',
+      name: 'Login',
       component: Login
     },
     {
       path: '/listings',
-      name:'Listings',
+      name: 'Listings',
       component: Listings
     },
     {
+      path: '/listings/:propertyId',
+      name: 'PropertyId',
+      component: PropertyId
+    },
+    {
       path: '/newlisting',
-      name:'ListingForm',
+      name: 'ListingForm',
       component: ListingForm
     }
   ]

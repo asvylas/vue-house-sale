@@ -3,7 +3,7 @@ const {
 } = require('../models')
 
 module.exports = {
-  async addProperty(req, res) {
+  async addProperty (req, res) {
     try {
       const property = await Property.create(req.body)
       res.send({
@@ -16,7 +16,7 @@ module.exports = {
     }
   },
   // List all properties
-  async listAll(req, res) {
+  async listAll (req, res) {
     try {
       const allProperties = await Property.findAll({
         limit: 50
@@ -28,6 +28,24 @@ module.exports = {
     } catch (err) {
       res.status(400).send({
         msg: 'Error getting the properties'
+      })
+    }
+  },
+
+  async findPropertyById (req, res) {
+    try {
+      const result = await Property.findOne({
+        where: {
+          id: req.body.id
+        }
+      })
+      res.send({
+        msg: 'Found one',
+        property: result
+      })
+    } catch (error) {
+      res.status(404).send({
+        msg: 'Not Found'
       })
     }
   }

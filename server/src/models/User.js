@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs')
 
-function hashPassword(user, options) {
-
+function hashPassword (user, options) {
   return bcrypt
     .genSalt(10)
     .then(salt => bcrypt.hash(user.password, salt, null))
@@ -29,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       .compare(password, this.password)
       .then((res) => {
         return res
-      });
+      })
   }
 
   return User

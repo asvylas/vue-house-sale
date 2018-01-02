@@ -7,7 +7,7 @@ const Op = Sequelize.Op
 
 module.exports = {
   // Find a specific property
-  async searchProperties(req, res) {
+  async searchProperties (req, res) {
     try {
       const result = await Property.findAll({
         where: {
