@@ -10,11 +10,13 @@
       dark>Listings</v-btn>
     </router-link>
     <v-spacer></v-spacer>
-    <v-text-field hide-details single-line></v-text-field>
+    <v-text-field hide-details 
+    single-line
+    v-model="searchBar"
+    ></v-text-field>
     <v-btn 
     icon
     @click="searchProperties"
-    v-bind="searchBar"
     >
     <v-icon>search</v-icon></v-btn>
      <router-link to="login">
@@ -47,7 +49,7 @@ export default {
   data () {
     return {
       drawer: null,
-      searchBar: null,
+      searchBar: '',
     }
   },
   props: {
@@ -62,6 +64,7 @@ export default {
         const response = await PropertyServices.searchProperties({
           options: this.searchBar
         })
+        console.log(response)
       } catch (error){
         console.log(error)
       }

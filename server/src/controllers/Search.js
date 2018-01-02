@@ -2,13 +2,18 @@ const {
   Property
 } = require('../models')
 
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
+
 module.exports = {
   // Find a specific property
   async searchProperties(req, res) {
     try {
       const result = await Property.findAll({
         where: {
-          name_of_listing: 'a'
+          name_of_listing: {
+            [Op.like]: `%${req.body.options}`
+          }
         },
         limit: 10
       })

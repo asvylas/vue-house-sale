@@ -8,6 +8,6 @@ export default {
     return Api().post('properties', property)
   },
   searchProperties(options){
-    return Api().get('searchProperties', options)
+    return Api().post('searchProperties', options)
   }
 }
