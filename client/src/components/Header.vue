@@ -11,7 +11,12 @@
     </router-link>
     <v-spacer></v-spacer>
     <v-text-field hide-details single-line></v-text-field>
-    <v-btn icon><v-icon>search</v-icon></v-btn>
+    <v-btn 
+    icon
+    @click="searchProperties"
+    v-bind="searchBar"
+    >
+    <v-icon>search</v-icon></v-btn>
      <router-link to="login">
       <v-btn 
       v-if="!$store.state.userLoggedIn"
@@ -36,11 +41,13 @@
 </template>
 
 <script>
+import PropertyServices from '@/services/PropertyServices'
 export default {
   name: 'Header',
   data () {
     return {
-      drawer: null
+      drawer: null,
+      searchBar: null,
     }
   },
   props: {
@@ -49,6 +56,15 @@ export default {
   methods: {
     async logoutUser(){
       this.$store.dispatch('logoutUser')
+    },
+    async searchProperties(){
+      try {
+        const response = await PropertyServices.searchProperties({
+          options: this.searchBar
+        })
+      } catch (error){
+        console.log(error)
+      }
     }
   }
 }

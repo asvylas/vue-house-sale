@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import AuthenticationService from '@/services/AuthenticationService'
+import PropertyServices from '@/services/PropertyServices'
 export default {
   name: 'ListingForm',
   data () {
@@ -61,7 +61,7 @@ export default {
   methods: {
     async addNewListing (){
       try {
-      const response = await AuthenticationService.addProperty({
+      const response = await PropertyServices.addProperty({
         name_of_listing: this.name,
         city: this.city,
         address: this.address,
@@ -69,6 +69,7 @@ export default {
         type_of_building: this.type,
         listed_by_user: "Fake user"
       })
+      this.$router.push('/listings')
       } catch (error) {
       }
     }

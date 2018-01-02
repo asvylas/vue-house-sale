@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import AuthenticationService from '@/services/AuthenticationService'
+import PropertyServices from '@/services/PropertyServices'
 export default {
   name: 'Listings',
   data () {
@@ -51,7 +51,7 @@ export default {
     },
   methods: {
     async getProperties (){
-            const response = await AuthenticationService.fetchProperties()
+            const response = await PropertyServices.fetchProperties()
             this.listings = response.data.property
         }
   }

@@ -6,11 +6,5 @@ export default {
   },
   login(credentials) {
     return Api().post('login', credentials)
-  },
-  fetchProperties() {
-    return Api().get('properties')
-  },
-  addProperty(property) {
-    return Api().post('properties', property)
   }
 }

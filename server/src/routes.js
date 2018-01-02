@@ -2,6 +2,7 @@ const AuthController = require('./controllers/AuthController')
 const ListDB = require('./controllers/ListDB')
 const AuthControlPolicy = require('./policies/AuthControlPolicy')
 const Properties = require('./controllers/Properties')
+const Search = require('./controllers/Search')
 
 module.exports = (app) => {
 
@@ -19,4 +20,7 @@ module.exports = (app) => {
     
   app.get('/properties',
     Properties.listAll)
+
+  app.post('/searchProperties',
+    Search.searchProperties)
 }
