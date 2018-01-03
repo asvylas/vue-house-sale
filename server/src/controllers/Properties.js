@@ -34,6 +34,7 @@ module.exports = {
 
   async findPropertyById (req, res) {
     try {
+      console.log(req)
       const result = await Property.findOne({
         where: {
           id: req.body.id

@@ -1,7 +1,7 @@
 <template>
   <v-layout column>
     <v-flex xs6 offset-xs3>
-      
+      <div v-model="listing">{{listing}}</div>
     </v-flex>
   </v-layout>
 </template>
@@ -13,12 +13,16 @@ export default {
   data () {
     return {
       id: null,
+      listing: null
     }
   },
   async mounted () {
     const id = this.$store.state.route.params.propertyId
     try {
-        const reponse = await PropertyServices.fetchById(id)
+        const response = await PropertyServices.fetchById({
+          id: id
+          })
+        this.listing = response.data.property
     } catch (error) {
         console.log('Error occured')
     }

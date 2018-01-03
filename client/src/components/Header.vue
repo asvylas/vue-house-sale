@@ -10,15 +10,18 @@
       dark>Listings</v-btn>
     </router-link>
     <v-spacer></v-spacer>
+
     <v-text-field hide-details 
     single-line
     v-model="searchBar"
+    @change="searchProperties"
     ></v-text-field>
     <v-btn 
     icon
     @click="searchProperties"
     >
     <v-icon>search</v-icon></v-btn>
+    
      <router-link to="login">
       <v-btn 
       v-if="!$store.state.userLoggedIn"
@@ -38,7 +41,6 @@
       @click="logoutUser" 
       dark>Logout</v-btn>
     </router-link>
-    
   </v-toolbar>
 </template>
 
@@ -49,7 +51,8 @@ export default {
   data () {
     return {
       drawer: null,
-      searchBar: '',
+      searchBar: null,
+      searchBarResult: null
     }
   },
   props: {
@@ -64,7 +67,8 @@ export default {
         const response = await PropertyServices.searchProperties({
           options: this.searchBar
         })
-        console.log(response)
+        this.searchBarResult = response.data.property
+        console.log(this.searchBarResult)
       } catch (error){
         console.log(error)
       }
