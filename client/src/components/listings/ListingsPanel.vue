@@ -1,4 +1,5 @@
 <template>
+<v-app>
      <v-layout dense column>
       <v-flex>
         <v-toolbar dense color="primary" dark>
@@ -9,31 +10,43 @@
           <v-tooltip top>
             <v-btn dark color="primary" slot="activator" icon>
               <v-icon>add</v-icon></v-btn>
-            <span>Add a new listing</span>
-          </v-tooltip>
-        </router-link>
-      </v-toolbar>
+              <span>Add a new listing</span>
+           </v-tooltip>
+          </router-link>
+        </v-toolbar>
 
       <v-container fluid grid-list-md class="grey lighten-4">
         <v-layout row wrap>
           <v-flex
             v-for="property in listings"
-            :key="property.id"
-          >
-          <v-card>
-            <div>Name: {{property.name_of_listing}}</div>
-            <div>City: {{property.city}}</div>
-            <div>Address: {{property.address}}</div>
-            <div>Zip Code: {{property.zip_code}}</div>
-            <div>Building type: {{property.type_of_building}}</div>
-            <div>User: {{property.listed_by_user}}</div>
-          </v-card>
+            :key="property.id">
+
+            <v-card>
+              <v-card-media v-bind:src="`/static/images/${property.id}.jpeg`" height="300px">
+              </v-card-media>
+              <v-card-title primary-title>
+                <div>
+                  <h3 class="headline mb-0">{{property.name_of_listing}}</h3>
+                  <span>City: {{property.city}}</span><br>
+                  <span>Address: {{property.address}}</span>
+                </div>
+              </v-card-title>
+              <v-card-actions>
+                <router-link to="/listings/${property.id}">
+                  <v-btn flat color="primary" @click="">View</v-btn>
+                </router-link>
+                <v-btn flat color="primary">Like</v-btn>
+                <v-btn flat color="primary">Share</v-btn>
+              </v-card-actions>
+            </v-card>
+
           </v-flex>
         </v-layout>
       </v-container>
 
     </v-flex>
   </v-layout>
+</v-app>
 </template>
 
 <script>
@@ -43,6 +56,7 @@ export default {
   data () {
     return {
       listings: null,
+      url: `/static/images/${this.$store.state.route.params.propertyId}.jpeg`
     }
   },
   mounted(){
