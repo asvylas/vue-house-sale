@@ -32,13 +32,17 @@
                 </div>
               </v-card-title>
               <v-card-actions>
-                <v-btn flat color="primary" 
+                <v-btn fab outline small color="primary" 
                 @click="() =>
                 {
                 $router.push(`/listings/${property.id}`)
-                }">View</v-btn>
-                <v-btn flat color="primary">Like</v-btn>
-                <v-btn flat color="primary">Share</v-btn>
+                }"><v-icon dark>pageview</v-icon></v-btn>
+                <v-btn fab outline small dark color="primary">
+                  <v-icon dark>favorite</v-icon>
+                </v-btn>
+                <v-btn fab outline small dark color="primary">
+                  <v-icon dark>share</v-icon>
+                </v-btn>
               </v-card-actions>
             </v-card>
 

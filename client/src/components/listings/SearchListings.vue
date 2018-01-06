@@ -29,6 +29,13 @@
           <v-card>
             <div>Name: {{property.name_of_listing}}</div>
             <div>City: {{property.city}}</div>
+            <v-card-actions>
+                <v-btn flat color="primary" 
+                @click="() =>
+                {
+                $router.push(`/listings/${property.id}`)
+                }">View</v-btn>
+              </v-card-actions>
           </v-card>
           </v-flex>
         </v-layout>

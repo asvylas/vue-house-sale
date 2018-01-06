@@ -12,8 +12,15 @@
           </div>
         </v-card-title>
         <v-card-actions>
-          <v-btn flat color="primary">Like</v-btn>
-          <v-btn flat color="primary">Share</v-btn>
+          <v-btn fab dark color="primary">
+            <v-icon dark>favorite</v-icon>
+          </v-btn>
+          <v-btn fab dark color="primary">
+            <v-icon dark>share</v-icon>
+          </v-btn>
+          <v-btn fab dark color="primary">
+            <v-icon dark>edit</v-icon>
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>

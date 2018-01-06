@@ -1,7 +1,7 @@
 <template>
 <v-app>
      <v-layout column>
-      <v-flex xs12 sm6 offset-sm3>
+      <v-flex xs10 offset-xs1>
         <search-listings/>
         <listings-panel/>
     </v-flex>
