@@ -32,9 +32,11 @@
                 </div>
               </v-card-title>
               <v-card-actions>
-                <router-link to="/listings/${property.id}">
-                  <v-btn flat color="primary" @click="">View</v-btn>
-                </router-link>
+                <v-btn flat color="primary" 
+                @click="() =>
+                {
+                $router.push(`/listings/${property.id}`)
+                }">View</v-btn>
                 <v-btn flat color="primary">Like</v-btn>
                 <v-btn flat color="primary">Share</v-btn>
               </v-card-actions>
@@ -64,9 +66,9 @@ export default {
     },
   methods: {
     async getProperties (){
-            const response = await PropertyServices.fetchProperties()
-            this.listings = response.data.property
-        }
+      const response = await PropertyServices.fetchProperties()
+      this.listings = response.data.property
+      }
   }
 }
 </script>
