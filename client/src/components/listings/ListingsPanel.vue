@@ -1,10 +1,9 @@
 <template>
-     <v-layout column>
-    <v-flex xs12 sm6 offset-sm3>
-
-      <v-toolbar color="primary" dark>
-        <v-toolbar-title>Current Listings</v-toolbar-title>
-        <v-spacer></v-spacer>
+     <v-layout dense column>
+      <v-flex>
+        <v-toolbar dense color="primary" dark>
+          <v-toolbar-title>Current Listings</v-toolbar-title>
+          <v-spacer></v-spacer>
 
         <router-link to="newlisting">
           <v-tooltip top>
@@ -40,10 +39,10 @@
 <script>
 import PropertyServices from '@/services/PropertyServices'
 export default {
-  name: 'Listings',
+  name: 'ListingsPanel',
   data () {
     return {
-      listings: null
+      listings: null,
     }
   },
   mounted(){

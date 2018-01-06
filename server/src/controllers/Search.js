@@ -15,7 +15,7 @@ module.exports = {
             [Op.like]: `%${req.body.options}`
           }
         },
-        limit: 10
+        limit: 3
       })
       res.send({
         msg: 'Found one',

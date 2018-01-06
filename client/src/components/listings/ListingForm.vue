@@ -67,7 +67,7 @@ export default {
         address: this.address,
         zip_code: this.zipcode,
         type_of_building: this.type,
-        listed_by_user: "Fake user"
+        listed_by_user: this.$store.state.user
       })
       this.$router.push('/listings')
       } catch (error) {

@@ -3,8 +3,8 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
-import Listings from '@/components/Listings'
-import ListingForm from '@/components/ListingForm'
+import Listings from '@/components/listings/Listings'
+import ListingForm from '@/components/listings/ListingForm'
 import PropertyId from '@/components/PropertyId'
 
 Vue.use(Router)

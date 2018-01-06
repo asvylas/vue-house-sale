@@ -52,10 +52,7 @@ module.exports = {
 
       const resUser = user.toJSON()
       res.send({
-        user: {
-          id: resUser.id,
-          email: resUser.email
-        },
+        user: resUser.email,
         token: jwtSignUser(resUser)
       })
     } catch (err) {

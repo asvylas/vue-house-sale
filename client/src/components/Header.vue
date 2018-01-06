@@ -10,18 +10,6 @@
       dark>Listings</v-btn>
     </router-link>
     <v-spacer></v-spacer>
-
-    <v-text-field hide-details 
-    single-line
-    v-model="searchBar"
-    @change="searchProperties"
-    ></v-text-field>
-    <v-btn 
-    icon
-    @click="searchProperties"
-    >
-    <v-icon>search</v-icon></v-btn>
-    
      <router-link to="login">
       <v-btn 
       v-if="!$store.state.userLoggedIn"
@@ -50,9 +38,7 @@ export default {
   name: 'Header',
   data () {
     return {
-      drawer: null,
-      searchBar: null,
-      searchBarResult: null
+      drawer: null
     }
   },
   props: {
@@ -61,17 +47,6 @@ export default {
   methods: {
     async logoutUser(){
       this.$store.dispatch('logoutUser')
-    },
-    async searchProperties(){
-      try {
-        const response = await PropertyServices.searchProperties({
-          options: this.searchBar
-        })
-        this.searchBarResult = response.data.property
-        console.log(this.searchBarResult)
-      } catch (error){
-        console.log(error)
-      }
     }
   }
 }
