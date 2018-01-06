@@ -4,25 +4,25 @@
     <router-link to="/">
       <v-toolbar-title dark class="white--text">Housefinder!</v-toolbar-title>
     </router-link>
-    <router-link dark to="listings">
+    <router-link dark to="/listings">
       <v-btn 
       flat 
       dark>Listings</v-btn>
     </router-link>
     <v-spacer></v-spacer>
-     <router-link to="login">
+     <router-link to="/login">
       <v-btn 
       v-if="!$store.state.userLoggedIn"
       dark
       flat>Login</v-btn>
     </router-link>
-    <router-link dark to="register">
+    <router-link dark to="/register">
       <v-btn 
       v-if="!$store.state.userLoggedIn"
       flat 
       dark>Register</v-btn>
     </router-link>
-    <router-link dark to="logout">
+    <router-link dark to="/logout">
       <v-btn 
       v-if="$store.state.userLoggedIn"
       flat
