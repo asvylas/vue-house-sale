@@ -23,9 +23,15 @@
             ></v-text-field>
             <v-text-field
               name="input-1"
-              label="Address"
+              label="Street"
               type="text"
-              v-model="address"
+              v-model="street"
+            ></v-text-field>
+            <v-text-field
+              name="input-1"
+              label="House number"
+              type="text"
+              v-model="housenumber"
             ></v-text-field>
             <v-text-field
               name="input-1"
@@ -55,7 +61,8 @@ export default {
     return {
       name: "",
       city: "",
-      address: "",
+      street: "",
+      housenumber: "",
       zipcode: "",
       type: ""
     }
@@ -66,7 +73,8 @@ export default {
       const response = await PropertyServices.addProperty({
         name_of_listing: this.name,
         city: this.city,
-        address: this.address,
+        street: this.street,
+        house_number: this.housenumber,
         zip_code: this.zipcode,
         type_of_building: this.type,
         listed_by_user: this.$store.state.user

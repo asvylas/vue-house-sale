@@ -61,7 +61,6 @@ export default {
           options: this.searchBar
         })
         this.searchBarResult = response.data.property
-        console.log(this.searchBarResult)
       } catch (error){
         console.log(error)
       }

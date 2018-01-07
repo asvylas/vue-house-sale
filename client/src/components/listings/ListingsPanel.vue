@@ -28,15 +28,13 @@
                 <div>
                   <h3 class="headline mb-0">{{property.name_of_listing}}</h3>
                   <span>City: {{property.city}}</span><br>
-                  <span>Address: {{property.address}}</span>
+                  <span>Address: {{property.street}} {{property.house_number}}</span>
                 </div>
               </v-card-title>
               <v-card-actions>
                 <v-btn fab outline small color="primary" 
-                @click="() =>
-                {
-                $router.push(`/listings/${property.id}`)
-                }"><v-icon dark>pageview</v-icon></v-btn>
+                @click="() => {$router.push(`/listings/${property.id}`)}">
+                  <v-icon dark>pageview</v-icon></v-btn>
                 <v-btn fab outline small dark color="primary">
                   <v-icon dark>favorite</v-icon>
                 </v-btn>
