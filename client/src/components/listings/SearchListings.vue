@@ -8,13 +8,14 @@
 
       <v-text-field hide-details 
         single-line
+        name="input-1"
         v-model="searchBar"
-        @input="searchProperties">
+        @input="blockMulticalls(searchProperties)">
         </v-text-field>
 
         <v-btn 
           icon
-          @click="searchProperties"
+          @click="blockMulticalls(searchProperties)"
           >
           <v-icon>search</v-icon>
         </v-btn>
@@ -57,13 +58,21 @@ export default {
   methods: {
     async searchProperties(){
       try {
-        const response = await PropertyServices.searchProperties({
+        if(this.searchBar == '') {
+          this.searchBarResult = ''
+          return
+        } else {
+          const response = await PropertyServices.searchProperties({
           options: this.searchBar
-        })
-        this.searchBarResult = response.data.property
+          })
+          this.searchBarResult = response.data.property
+        }
       } catch (error){
         console.log(error)
       }
+    },
+    blockMulticalls(a){
+      setTimeout(a, 400)
     }
   }
 }

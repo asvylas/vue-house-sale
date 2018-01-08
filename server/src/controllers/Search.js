@@ -11,9 +11,13 @@ module.exports = {
     try {
       const result = await Property.findAll({
         where: {
-          name_of_listing: {
-            [Op.like]: `%${req.body.options}`
-          }
+          $or: [
+            'name_of_listing', 'city', 'street'
+          ].map(i => ({
+            [i]: {
+              $like: `%${req.body.options}%`
+            }
+          }))
         },
         limit: 3
       })
