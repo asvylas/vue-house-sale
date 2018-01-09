@@ -10,12 +10,12 @@
         single-line
         name="input-1"
         v-model="searchBar"
-        @input="blockMulticalls(searchProperties)">
+        @input="searchProperties">
         </v-text-field>
 
         <v-btn 
           icon
-          @click="blockMulticalls(searchProperties)"
+          @click="searchProperties"
           >
           <v-icon>search</v-icon>
         </v-btn>
@@ -70,9 +70,6 @@ export default {
       } catch (error){
         console.log(error)
       }
-    },
-    blockMulticalls(a){
-      setTimeout(a, 400)
     }
   }
 }
