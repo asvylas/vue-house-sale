@@ -21,7 +21,11 @@
               v-model="password"
             ></v-text-field>
             <v-btn color="primary" @click="loginUser">Login</v-btn>
-            <p>{{msg}}</p>
+
+            <v-alert color="warning" icon="priority_high" transition="scale-transition" :value="alert">
+              {{msg}}
+            </v-alert>
+
           </div>
         </div>
     </v-flex>
@@ -35,6 +39,7 @@ export default {
   data () {
     return {
       msg: null,
+      alert: false,
       email: '',
       password: ''
     }
@@ -46,11 +51,27 @@ export default {
             email: this.email,
             password: this.password
           })
-          this.$store.dispatch('setToken', response.data.token)
-          this.$store.dispatch('setUser', response.data.user)
-          this.$router.push('/')
+          if(response.data.token && response.data.user){
+            this.$store.dispatch('setToken', response.data.token)
+            this.$store.dispatch('setUser', response.data.user)
+            this.$router.push('/')
+          } else {
+            this.alert = true
+            this.msg = 'Something went wrong'
+
+            setTimeout(() => { 
+            this.alert = false
+           }, 3000);
+           
+          }
         } catch (error) {
+          
+          this.alert = true
           this.msg = error.response.data.error
+
+          setTimeout(() => { 
+            this.alert = false
+           }, 3000);
         }
       }
   }

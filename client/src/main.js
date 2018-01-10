@@ -12,7 +12,7 @@ import { sync } from 'vuex-router-sync'
 Vue.config.productionTip = false
 Vue.use(Vuetify, {
   theme: {
-    primary: 'grey',
+    primary: 'indigo',
     secondary: '#424242',
     accent: '#82B1FF',
     error: '#FF5252',

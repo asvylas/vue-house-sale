@@ -13,16 +13,27 @@
               label="Email"
               type="text"
               v-model="email"
+              :disabled='disableField'
             ></v-text-field>
             <v-text-field
               name="input-1"
               label="Password"
               type="password"
               v-model="password"
+              :disabled='disableField'
             ></v-text-field>
-        <v-btn color="primary" @click="registerUser">Submit</v-btn>
-        <p>{{msg}}</p>
-        </div>
+            <v-btn color="primary"
+              @click="registerUser"
+              >Submit</v-btn>
+        
+            <v-alert color="warning" icon="priority_high" transition="scale-transition" :value="alertError">
+              {{msgError}}
+            </v-alert>
+            <v-alert color="success" icon="check_circle" transition="scale-transition" :value="alertSuccess">
+              {{msgSuccess}}
+             </v-alert>  
+           </div>
+
         </div>
     </v-flex>
   </v-layout>
@@ -34,10 +45,17 @@ export default {
   name: 'Register',
   data () {
     return {
-      msg: null,
+      msgError: false,
+      alertError: false,
+      msgSuccess: false,
+      alertSuccess: false,
+      disableField: false,
       email: '',
       password: ''
     }
+  },
+  watch: {
+
   },
   methods: {
       async registerUser(){
@@ -46,9 +64,26 @@ export default {
             email: this.email,
             password: this.password
           })
-          this.msg = response.data.msg
+
+          this.msgSuccess = response.data.msg
+          this.alertSuccess = true
+          this.disableField = true
+          console.log(this.msgSuccess, response.data.msg )
+
+          if (response.data.msg) {
+            setTimeout( ()=> {
+              this.$router.push('/')
+            }, 3000)
+          }
+          
         } catch (error) {
-          this.msg = error.response.data.error
+
+          this.alertError = true
+          this.msgError = error.response.data.error
+
+          setTimeout(() => { 
+            this.alertError = false
+           }, 3000);
         }
       }
   }
@@ -57,5 +92,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
