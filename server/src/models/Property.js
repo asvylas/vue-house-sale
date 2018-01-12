@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     house_number: DataTypes.INTEGER,
     zip_code: DataTypes.STRING,
     type_of_building: DataTypes.STRING,
-    listed_by_user: DataTypes.STRING
+    listed_by_user: DataTypes.STRING,
+    listing_views: DataTypes.INTEGER
   })
   return Property
 }

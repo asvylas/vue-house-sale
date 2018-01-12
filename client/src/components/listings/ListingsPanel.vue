@@ -28,7 +28,8 @@
                 <div>
                   <h3 class="headline mb-0">{{property.name_of_listing}}</h3>
                   <span>City: {{property.city}}</span><br>
-                  <span>Address: {{property.street}} {{property.house_number}}</span>
+                  <span>Address: {{property.street}} {{property.house_number}}</span><br>
+                  <span>Views: {{property.listing_views}}</span>
                 </div>
               </v-card-title>
               <v-card-actions>

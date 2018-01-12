@@ -5,7 +5,7 @@ const {
 module.exports = {
   async addProperty (req, res) {
     try {
-      const property = await Property.create(req.body)
+      const result = await Property.create(req.body)
       res.send({
         msg: 'New property created'
       })
@@ -18,12 +18,12 @@ module.exports = {
   // List all properties
   async listAll (req, res) {
     try {
-      const allProperties = await Property.findAll({
-        limit: 50
+      const results = await Property.findAll({
+        limit: 10
       })
       res.send({
         msg: 'All properties',
-        property: allProperties
+        property: results
       })
     } catch (err) {
       res.status(400).send({
@@ -43,6 +43,11 @@ module.exports = {
         msg: 'Found one',
         property: result
       })
+      const currentViews = result.dataValues.listing_views + 1
+      result.update({
+        listing_views: currentViews
+      })
+      console.log(result.dataValues)
     } catch (error) {
       res.status(404).send({
         msg: 'Not Found'

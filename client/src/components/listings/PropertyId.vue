@@ -23,7 +23,8 @@
                   <span>{{this.listing.city}}</span><br>
                   <span>{{this.listing.street}}, {{this.listing.house_number}}</span><br>
                   <span>{{this.listing.type_of_building}}</span><br>
-                  <span>{{this.listing.listed_by_user}}</span>
+                  <span>{{this.listing.listed_by_user}}</span><br>
+                  <span>Views: {{this.listing.listing_views}}</span>
                 </div>
               </v-flex>
 

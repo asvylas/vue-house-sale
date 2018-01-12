@@ -64,7 +64,8 @@ export default {
       street: "",
       housenumber: "",
       zipcode: "",
-      type: ""
+      type: "",
+      views: 0
     }
   },
   methods: {
