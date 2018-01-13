@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import ApiKeys from '@/config/config'
+import GoogleApi from '@/services/GoogleApi'
 import PropertyServices from '@/services/PropertyServices'
 import {mapState} from 'vuex'
 export default {
@@ -102,31 +102,16 @@ export default {
     // Runs on mounting 
     // Resizing google view
     window.addEventListener('resize', () => {
-     this.googleMapsResize() 
+     GoogleApi.googleMapsResize() 
      })
     // Runs once mounting is fully done
     this.$nextTick(function () {
-      const googleMapsWindow = document.getElementById('google-maps-view')
-      googleMapsWindow.src = `https://www.google.com/maps/embed/v1/search?key=${ApiKeys.Keys.google}&q=${this.listing.street}+${this.listing.house_number},${this.listing.city}`
+      GoogleApi.googleSetSRC(this.listing)
     })
   },
   methods: {
-    googleMapsResize(){
-      const mediaCard = document.getElementById('media-card')
-      const googleMapsWindow = document.getElementById('google-maps-view')
-      const googleMapsCard = document.getElementById('google-maps-card')
-      googleMapsWindow.width = mediaCard.clientWidth - 6
-    },
     googleMapsDisplay(){
-      const mediaCard = document.getElementById('media-card')
-      const googleMapsWindow = document.getElementById('google-maps-view')
-      const googleMapsCard = document.getElementById('google-maps-card')
-      googleMapsWindow.width = mediaCard.clientWidth - 6
-      if (googleMapsCard.className == "" || null) {
-        googleMapsCard.className = 'hidden'
-      } else {
-        googleMapsCard.className = ''
-      }
+      GoogleApi.googleMapsDisplay()
     }
   }
 }
