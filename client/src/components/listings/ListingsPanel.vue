@@ -35,9 +35,11 @@
               </v-card-title>
               <v-card-actions>
                 <v-btn fab small color="primary" 
-                @click="() => {$router.push(`/listings/${property.id}`)}">
+                  @click="() => {$router.push(`/listings/${property.id}`)}">
                   <v-icon dark>pageview</v-icon></v-btn>
-                <v-btn fab small dark color="primary">
+                <v-btn fab small dark 
+                  @click="bookmark(property.id)"
+                  color="primary">
                   <v-icon dark>favorite</v-icon>
                 </v-btn>
                 <v-btn fab small dark color="primary">
@@ -56,11 +58,13 @@
 
 <script>
 import PropertyServices from '@/services/PropertyServices'
+import BookmarkServices from '@/services/BookmarkServices'
 export default {
   name: 'ListingsPanel',
   data () {
     return {
       listings: null,
+      error: null,
       url: `/static/images/${this.$store.state.route.params.propertyId}.jpeg`
     }
   },
@@ -69,9 +73,20 @@ export default {
     },
   methods: {
     async getProperties (){
-      const response = await PropertyServices.fetchProperties()
+      let response = await PropertyServices.fetchProperties()
       this.listings = response.data.property
+    },
+    async bookmark(propertyId) {
+      let userId = this.$store.state.id
+      if (userId === null || undefined || '') {
+        return this.error = 'Login to bookmark'
+      } else {
+        let response = await BookmarkServices.bookmarkProperty(userId, propertyId)
+        if(response.data.result === true) {
+          console.log('Hi MOM')
+        }
       }
+    }
   }
 }
 </script>

@@ -54,6 +54,7 @@ export default {
           if(response.data.token && response.data.user){
             this.$store.dispatch('setToken', response.data.token)
             this.$store.dispatch('setUser', response.data.user)
+            this.$store.dispatch('setId', response.data.id)
             this.$router.push('/')
           } else {
             this.alert = true

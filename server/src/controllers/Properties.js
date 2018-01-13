@@ -5,13 +5,13 @@ const {
 module.exports = {
   async addProperty (req, res) {
     try {
-      const result = await Property.create(req.body)
+      await Property.create(req.body)
       res.send({
         msg: 'New property created'
       })
     } catch (err) {
       res.status(400).send({
-        msg: 'Error creating the property'
+        error: 'Error creating the property'
       })
     }
   },
@@ -27,7 +27,7 @@ module.exports = {
       })
     } catch (err) {
       res.status(400).send({
-        msg: 'Error getting the properties'
+        error: 'Error getting the properties'
       })
     }
   },
@@ -49,7 +49,7 @@ module.exports = {
       })
     } catch (error) {
       res.status(404).send({
-        msg: 'Not Found'
+        error: 'Not Found'
       })
     }
   }

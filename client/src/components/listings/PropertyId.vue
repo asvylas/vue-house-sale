@@ -44,7 +44,7 @@
              <v-icon>share</v-icon>
           </v-btn>
           <v-btn id="editbtn" class="btnx" color="primary" 
-            v-if="this.$store.state.user == this.listing.listed_by_user"
+            v-if="this.$store.state.user === this.listing.listed_by_user"
             dark small absolute top right fab>
              <v-icon>edit</v-icon>
           </v-btn>

@@ -2,6 +2,7 @@ const AuthController = require('./controllers/AuthController')
 const AuthControlPolicy = require('./policies/AuthControlPolicy')
 const Properties = require('./controllers/Properties')
 const Search = require('./controllers/Search')
+const Bookmarks = require('./controllers/Bookmarks')
 
 module.exports = (app) => {
   app.post('/register',
@@ -22,4 +23,7 @@ module.exports = (app) => {
 
   app.post('/searchProperties',
     Search.searchProperties)
+
+  app.post('/bookmarks',
+    Bookmarks.addNewBookmark)
 }

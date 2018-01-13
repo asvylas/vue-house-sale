@@ -15,7 +15,7 @@ module.exports = {
   // Registering user to DB
   async register (req, res) {
     try {
-      const user = await User.create(req.body)
+      await User.create(req.body)
       res.send({
         msg: 'Registration successful, you will be redirected soon, please wait...'
       })
@@ -44,7 +44,7 @@ module.exports = {
       }
 
       const checkPassword = await user.comparePassword(password)
-      if (checkPassword == false) {
+      if (checkPassword === false) {
         return res.status(403).send({
           error: 'Invalid password'
         })
@@ -53,6 +53,7 @@ module.exports = {
       const resUser = user.toJSON()
       res.send({
         user: resUser.email,
+        id: resUser.id,
         token: jwtSignUser(resUser)
       })
     } catch (err) {

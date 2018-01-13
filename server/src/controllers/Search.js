@@ -2,9 +2,6 @@ const {
   Property
 } = require('../models')
 
-const Sequelize = require('sequelize')
-const Op = Sequelize.Op
-
 module.exports = {
   // Find a specific property
   async searchProperties (req, res) {
@@ -27,7 +24,7 @@ module.exports = {
       })
     } catch (err) {
       res.status(400).send({
-        msg: 'Error getting the requested property'
+        error: 'Error getting the requested property'
       })
     }
   }
