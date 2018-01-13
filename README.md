@@ -15,5 +15,6 @@ RESTful API for listings.
 Mostly flashed out UI.
 Simple query/search system for listings.
 Google Maps API to display listings.
-
+Tracked view counts on listings.
+Bookmarking.
 
