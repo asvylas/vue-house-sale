@@ -2,7 +2,7 @@
   <v-toolbar dark dense color="primary">
     <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     <router-link to="/">
-      <v-toolbar-title dark class="white--text">Housefinder!</v-toolbar-title>
+      <v-toolbar-title dark class="white--text">Logo</v-toolbar-title>
     </router-link>
     <router-link dark to="/listings">
       <v-btn 

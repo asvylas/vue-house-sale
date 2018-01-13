@@ -1,5 +1,4 @@
 <template>
-<v-app>
      <v-layout dense column>
       <v-flex>
         <v-toolbar dense color="primary" dark>
@@ -8,7 +7,9 @@
 
         <router-link to="newlisting">
           <v-tooltip top>
-            <v-btn dark color="primary" slot="activator" icon>
+            <v-btn 
+              v-if="this.$store.state.userLoggedIn"
+              dark color="primary" slot="activator" icon>
               <v-icon>add</v-icon></v-btn>
               <span>Add a new listing</span>
            </v-tooltip>
@@ -33,13 +34,13 @@
                 </div>
               </v-card-title>
               <v-card-actions>
-                <v-btn fab outline small color="primary" 
+                <v-btn fab small color="primary" 
                 @click="() => {$router.push(`/listings/${property.id}`)}">
                   <v-icon dark>pageview</v-icon></v-btn>
-                <v-btn fab outline small dark color="primary">
+                <v-btn fab small dark color="primary">
                   <v-icon dark>favorite</v-icon>
                 </v-btn>
-                <v-btn fab outline small dark color="primary">
+                <v-btn fab small dark color="primary">
                   <v-icon dark>share</v-icon>
                 </v-btn>
               </v-card-actions>
@@ -51,7 +52,6 @@
 
     </v-flex>
   </v-layout>
-</v-app>
 </template>
 
 <script>

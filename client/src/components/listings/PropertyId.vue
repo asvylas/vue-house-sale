@@ -35,16 +35,20 @@
         </v-card-title>
 
         <v-card-actions>
-          <v-btn color="primary" dark small absolute top right fab>
+          <v-btn color="primary" class="btnx" 
+          v-if="this.$store.state.userLoggedIn"
+          dark small absolute top right fab>
              <v-icon>favorite</v-icon>
           </v-btn>
-          <v-btn id="sharebtn" color="primary" dark small absolute top right fab>
+          <v-btn id="sharebtn" class="btnx" color="primary" dark small absolute top right fab>
              <v-icon>share</v-icon>
           </v-btn>
-          <v-btn id="editbtn" color="primary" dark small absolute top right fab>
+          <v-btn id="editbtn" class="btnx" color="primary" 
+            v-if="this.$store.state.user == this.listing.listed_by_user"
+            dark small absolute top right fab>
              <v-icon>edit</v-icon>
           </v-btn>
-            <v-btn id="placebtn" color="primary" 
+            <v-btn id="placebtn"  class="btnx" color="primary" 
             dark small absolute
             @click='googleMapsDisplay' top right fab>
              <v-icon>place</v-icon>
@@ -74,6 +78,7 @@
 <script>
 import ApiKeys from '@/config/config'
 import PropertyServices from '@/services/PropertyServices'
+import {mapState} from 'vuex'
 export default {
   name: 'PropertyId',
   data () {
@@ -84,14 +89,9 @@ export default {
     }
   },
   async mounted () {
-    // Runs on mounting 
-    // Resizing google view
-    window.addEventListener('resize', () => {
-     this.googleMaps() 
-     })
-
-    const id = this.$store.state.route.params.propertyId
+    // Fetching data
     try {
+        const id = this.$store.state.route.params.propertyId
         const response = await PropertyServices.fetchById({
           id: id
           })
@@ -99,14 +99,19 @@ export default {
     } catch (error) {
         console.log('Error occured')
     }
+    // Runs on mounting 
+    // Resizing google view
+    window.addEventListener('resize', () => {
+     this.googleMapsResize() 
+     })
     // Runs once mounting is fully done
     this.$nextTick(function () {
       const googleMapsWindow = document.getElementById('google-maps-view')
       googleMapsWindow.src = `https://www.google.com/maps/embed/v1/search?key=${ApiKeys.Keys.google}&q=${this.listing.street}+${this.listing.house_number},${this.listing.city}`
-  })
+    })
   },
   methods: {
-    googleMaps(){
+    googleMapsResize(){
       const mediaCard = document.getElementById('media-card')
       const googleMapsWindow = document.getElementById('google-maps-view')
       const googleMapsCard = document.getElementById('google-maps-card')
@@ -130,13 +135,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #sharebtn{
-  margin-right: 50px;
+  margin-right: 52px;
 }
 #editbtn{
-  margin-right: 97px;
+  margin-right: 102px;
 }
 #placebtn{
-  margin-right: 143px;
+  margin-right: 152px;
 }
 .hidden{
   display: none;

@@ -19,7 +19,7 @@ module.exports = {
   async listAll (req, res) {
     try {
       const results = await Property.findAll({
-        limit: 10
+        limit: 30
       })
       res.send({
         msg: 'All properties',
@@ -47,7 +47,6 @@ module.exports = {
       result.update({
         listing_views: currentViews
       })
-      console.log(result.dataValues)
     } catch (error) {
       res.status(404).send({
         msg: 'Not Found'

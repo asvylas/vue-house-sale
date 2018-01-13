@@ -1,5 +1,4 @@
 <template>
-<v-app>
    <v-layout column>
     <v-flex xs6 offset-xs3>
       <div class="white elevation-2" v-on:keyup.13="addNewListing">
@@ -50,7 +49,6 @@
         </div>
     </v-flex>
   </v-layout>
-</v-app>
 </template>
 
 <script>
@@ -66,6 +64,11 @@ export default {
       zipcode: "",
       type: "",
       views: 0
+    }
+  },
+  mounted () {
+    if (this.$store.state.user == null || undefined || '') {
+      this.$router.push('/listings')
     }
   },
   methods: {

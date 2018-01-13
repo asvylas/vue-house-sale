@@ -1,12 +1,10 @@
 <template>
-<v-app>
      <v-layout column>
       <v-flex xs10 offset-xs1>
         <search-listings/>
         <listings-panel/>
     </v-flex>
   </v-layout>
-</v-app>
 </template>
 
 <script>
