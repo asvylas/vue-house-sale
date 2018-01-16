@@ -1,5 +1,5 @@
 <template>
-  <v-layout column>
+  <v-layout column class="mb-5">
     <v-flex xs6 offset-xs3>
       <div class="white elevation-2" v-on:keyup.13="registerUser">
         <v-toolbar flat dark dense class="primary">

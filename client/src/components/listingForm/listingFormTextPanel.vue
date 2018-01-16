@@ -1,5 +1,5 @@
 <template>
-   <v-layout column>
+   <v-layout>
     <v-flex xs6 offset-xs3>
       <div class="white elevation-2" v-on:keyup.13="addNewListing">
         <v-toolbar flat dark dense class="primary">
@@ -44,6 +44,11 @@
               type="text"
               v-model="type"
             ></v-text-field>
+            <v-text-field
+              name="input-7-1"
+              label="Description"
+              multi-line
+            ></v-text-field>
         <v-btn color="primary" @click="addNewListing">Submit</v-btn>
         </div>
         </div>
@@ -54,7 +59,7 @@
 <script>
 import PropertyServices from '@/services/PropertyServices'
 export default {
-  name: 'ListingForm',
+  name: 'listingFormTextPanel',
   data () {
     return {
       name: "",

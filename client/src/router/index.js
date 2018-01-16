@@ -4,7 +4,7 @@ import Index from '@/components/Index'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Listings from '@/components/listings/Listings'
-import ListingForm from '@/components/listings/ListingForm'
+import ListingForm from '@/components/listingForm/ListingForm'
 import PropertyId from '@/components/listings/PropertyId'
 
 Vue.use(Router)

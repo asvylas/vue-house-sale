@@ -78,7 +78,6 @@
 <script>
 import GoogleApi from '@/services/GoogleApi'
 import PropertyServices from '@/services/PropertyServices'
-import {mapState} from 'vuex'
 export default {
   name: 'PropertyId',
   data () {

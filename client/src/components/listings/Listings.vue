@@ -1,6 +1,6 @@
 <template>
-     <v-layout column>
-      <v-flex xs10 offset-xs1>
+  <v-layout column class="mb-5">
+    <v-flex xs10 offset-xs1>
         <search-listings/>
         <listings-panel/>
     </v-flex>
