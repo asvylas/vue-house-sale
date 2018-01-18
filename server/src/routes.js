@@ -3,6 +3,7 @@ const AuthControlPolicy = require('./policies/AuthControlPolicy')
 const Properties = require('./controllers/Properties')
 const Search = require('./controllers/Search')
 const Bookmarks = require('./controllers/Bookmarks')
+const Uploads = require('./controllers/Uploads')
 
 module.exports = (app) => {
   app.post('/register',
@@ -13,6 +14,7 @@ module.exports = (app) => {
     AuthController.login)
 
   app.post('/properties',
+    Uploads.storeFile,
     Properties.addProperty)
 
   app.get('/properties',

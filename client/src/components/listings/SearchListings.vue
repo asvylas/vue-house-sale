@@ -23,20 +23,21 @@
 
       <v-container fluid grid-list-md class="grey lighten-4">
         <v-layout row wrap>
-          <v-flex
+          <v-flex class="text-sm-left"
             v-for="property in searchBarResult"
             :key="property.id"
           >
-          <v-card>
-            <div>Name: {{property.name_of_listing}}</div>
-            <div>City: {{property.city}}</div>
+          <v-card >
+            <div class='text'>Name: {{property.name_of_listing}}</div>
+            <div class='text'>Street: {{property.street}}, {{property.house_number}}</div>
+            <div class='text'>City: {{property.city}}</div>
             <v-card-actions>
-                <v-btn flat color="primary" 
+                <v-btn fab dark small color="primary" 
                 @click="() =>
                 {
                 $router.push(`/listings/${property.id}`)
-                }">View</v-btn>
-              </v-card-actions>
+                }"><v-icon dark>pageview</v-icon></v-btn>
+            </v-card-actions>
           </v-card>
           </v-flex>
         </v-layout>
@@ -77,5 +78,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+div.text {
+  padding: 10px 0px 0px 10px;
+}
 </style>

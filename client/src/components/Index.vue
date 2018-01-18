@@ -11,7 +11,7 @@
         class="primary lighten-2 mt-5"
         dark
         large
-        href="/listings"
+        @click="() => {$router.push(`/listings`)}"
       >
         Find it right now!
       </v-btn>
