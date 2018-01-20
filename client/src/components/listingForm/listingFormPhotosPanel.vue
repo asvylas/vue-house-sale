@@ -49,10 +49,23 @@
         </v-stepper-content>
 
         <v-stepper-step step="2" v-bind:complete="e6 > 2">
-          Upload photos
+          Upload the photos of it
           <small>People will be thrilled to see how it looks</small></v-stepper-step>
         <v-stepper-content step="2">
-          <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
+          <v-card class="mb-5" 
+          height="200px"
+          v-for="image in imageURL"
+          >
+          <img :src="image" alt="" height="200px">
+          </v-card>
+          <input 
+          type="file" 
+          multiple 
+          style="display:none" 
+          ref="browseFiles" 
+          accept="image/*"
+          @change="filesSelected">
+          <v-btn color="primary" @click="triggerFileBrowser">Upload files</v-btn>
           <v-btn color="primary" @click.native="e6 = 3">Continue</v-btn>
           <v-btn flat>Cancel</v-btn>
         </v-stepper-content>
@@ -90,7 +103,9 @@ export default {
       housenumber: "",
       zipcode: "",
       type: "",
-      description: ""
+      description: "",
+      imageURL: [],
+      a: null
     }
   },
   methods: {
@@ -104,11 +119,39 @@ export default {
         zip_code: this.zipcode,
         type_of_building: this.type,
         description: this.description,
-        listed_by_user: this.$store.state.user
+        listed_by_user: this.$store.state.user,
+        a: this.a,
       })
       this.$router.push('/listings')
       } catch (error) {
+        console.log(error.response)
       }
+    },
+    triggerFileBrowser() {
+      this.$refs.browseFiles.click()
+    },
+    filesSelected(e) {
+      const filesToUpload = e.target.files
+      this.a = filesToUpload 
+      console.log(filesToUpload)
+      for (let i = 0; i <  filesToUpload.length; i++) {
+        let filename = filesToUpload[i].name
+        const fileReader = new FileReader()
+        fileReader.addEventListener('load', ()=>{
+          this.imageURL.push(fileReader.result)
+        })
+        fileReader.readAsDataURL(filesToUpload[i])
+      }
+      console.log(this.imageURL)
+    },
+    sendData(data){
+      const XHR = new XMLHttpRequest()
+      const FD = new FormData()
+      for(item in data){
+        FD.append(item, data[item])
+      }
+      XHR.open('POST', 'http://localhost:8082/properties')
+      XHR.send(FD)
     }
   }
 }

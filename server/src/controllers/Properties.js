@@ -6,7 +6,9 @@ const {
 } = require('../models')
 
 module.exports = {
+  // Add a new property, if files are not attached/wrong type request rejects
   async addProperty (req, res) {
+    // checks for files
     if (!req.files) {
       res.status(400).send({
         error: 'Wrong file format, please use .jpeg'
@@ -17,6 +19,7 @@ module.exports = {
         const fileObject = {
           listing_id: newProperty.id
         }
+        // attaching file names to Images model. ~
         for (let i = 0; i < req.files.length; i++) {
           let x = 'image_' + i
           fileObject[x] = req.files[i].destination + req.files[i].filename
@@ -50,7 +53,7 @@ module.exports = {
       })
     }
   },
-
+  // Throws back property by ID
   async findPropertyById (req, res) {
     try {
       const result = await Property.findOne({
