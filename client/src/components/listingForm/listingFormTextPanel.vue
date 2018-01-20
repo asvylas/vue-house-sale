@@ -71,11 +71,6 @@ export default {
       views: 0
     }
   },
-  mounted () {
-    if (this.$store.state.user == null || undefined || '') {
-      this.$router.push('/listings')
-    }
-  },
   methods: {
     async addNewListing (){
       try {

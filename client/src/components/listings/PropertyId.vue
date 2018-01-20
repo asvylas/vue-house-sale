@@ -98,11 +98,11 @@ export default {
     } catch (error) {
         console.log('Error occured')
     }
-    // Runs on mounting 
-    // Resizing google view
-    window.addEventListener('resize', () => {
-     GoogleApi.googleMapsResize() 
-     })
+
+    // Resizing google view || Need to remake this. ~
+    // window.addEventListener('resize', () => {
+    //  GoogleApi.googleMapsResize() 
+    //  })
     // Runs once mounting is fully done
     this.$nextTick(function () {
       GoogleApi.googleSetSRC(this.listing)

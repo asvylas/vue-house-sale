@@ -4,15 +4,21 @@ const {
 
 module.exports = {
   async addProperty (req, res) {
-    try {
-      await Property.create(req.body)
-      res.send({
-        msg: 'New property created'
-      })
-    } catch (err) {
+    if (!req.file) {
       res.status(400).send({
-        error: 'Error creating the property'
+        error: 'Wrong file format, please use .jpeg or .png'
       })
+    } else {
+      try {
+        await Property.create(req.body)
+        res.send({
+          msg: 'New property created'
+        })
+      } catch (err) {
+        res.status(400).send({
+          error: 'Error creating the property'
+        })
+      }
     }
   },
   // List all properties

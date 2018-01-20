@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     zip_code: DataTypes.STRING,
     type_of_building: DataTypes.STRING,
     listed_by_user: DataTypes.STRING,
+    description: DataTypes.TEXT,
     listing_views: DataTypes.INTEGER
   })
   return Property

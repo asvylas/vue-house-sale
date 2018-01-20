@@ -2,7 +2,6 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap>
       <v-flex d-flex xs12>
-        <listing-form-text-panel/>
         <listing-form-photos-panel/>
       </v-flex>
     </v-layout>
