@@ -1,18 +1,31 @@
 const {
   Property
 } = require('../models')
+const {
+  Images
+} = require('../models')
 
 module.exports = {
   async addProperty (req, res) {
-    if (!req.file) {
+    if (!req.files) {
       res.status(400).send({
-        error: 'Wrong file format, please use .jpeg or .png'
+        error: 'Wrong file format, please use .jpeg'
       })
     } else {
       try {
-        await Property.create(req.body)
+        const newProperty = await Property.create(req.body)
+        const fileObject = {
+          listing_id: newProperty.id
+        }
+        for (let i = 0; i < req.files.length; i++) {
+          let x = 'image_' + i
+          fileObject[x] = req.files[i].destination + req.files[i].filename
+        }
+        const imageLocations = await Images.create(fileObject)
         res.send({
-          msg: 'New property created'
+          msg: 'New property created',
+          a: newProperty,
+          b: imageLocations
         })
       } catch (err) {
         res.status(400).send({

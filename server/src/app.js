@@ -13,6 +13,7 @@ const app = express()
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(cors())
+app.use('/uploads', express.static('uploads'))
 // Routesc
 require('./routes')(app)
 // Starting server

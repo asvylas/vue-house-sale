@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
     cb(null, './uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname)
+    cb(null, new Date().toLocaleDateString() + '-' + new Date().getHours() + '-' + file.originalname)
   }
 })
 const fileFilter = (req, file, cb) => {
@@ -38,7 +38,7 @@ module.exports = (app) => {
     AuthController.login)
 
   app.post('/properties',
-    upload.single('a'),
+    upload.array('a', 6),
     Properties.addProperty)
 
   app.get('/properties',
