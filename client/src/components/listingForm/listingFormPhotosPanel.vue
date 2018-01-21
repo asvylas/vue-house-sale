@@ -81,7 +81,7 @@
                   multi-line
                   v-model="description"
                 ></v-text-field>
-          <v-btn color="primary" @click.native="addNewListing">Continue</v-btn>
+          <v-btn color="primary" @click="sendData">Continue</v-btn>
           <v-btn flat>Cancel</v-btn>
         </v-stepper-content>
 
@@ -132,8 +132,7 @@ export default {
     },
     filesSelected(e) {
       const filesToUpload = e.target.files
-      this.a = filesToUpload 
-      console.log(filesToUpload)
+      this.a = filesToUpload
       for (let i = 0; i <  filesToUpload.length; i++) {
         let filename = filesToUpload[i].name
         const fileReader = new FileReader()
@@ -142,15 +141,33 @@ export default {
         })
         fileReader.readAsDataURL(filesToUpload[i])
       }
-      console.log(this.imageURL)
     },
-    sendData(data){
+    // Need to either add additional library to make this call or setup a crude error handling as is. ~
+    sendData(){
+      const filesToAppend = this.a
+      const data = {
+        name_of_listing: this.name,
+        city: this.city,
+        street: this.street,
+        house_number: this.housenumber,
+        zip_code: this.zipcode,
+        type_of_building: this.type,
+        description: this.description,
+        listed_by_user: this.$store.state.user,
+      }
       const XHR = new XMLHttpRequest()
       const FD = new FormData()
-      for(item in data){
+      // Appending text
+      for(let item in data){
         FD.append(item, data[item])
       }
-      XHR.open('POST', 'http://localhost:8082/properties')
+      // Appending files
+      for(let file in filesToAppend){
+        FD.append('a', filesToAppend[file])
+      }
+      XHR.open('POST', 'http://localhost:8082/properties', true)
+      XHR.onload = function (e) {
+      }
       XHR.send(FD)
     }
   }
