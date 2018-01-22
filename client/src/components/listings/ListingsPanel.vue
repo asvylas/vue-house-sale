@@ -23,7 +23,7 @@
             :key="property.id">
 
             <v-card>
-              <v-card-media v-bind:src="`/static/images/${property.id}.jpeg`" height="300px">
+              <v-card-media v-bind:src="`http://localhost:8082/${property.main_image_path}`" height="300px">
               </v-card-media>
               <v-card-title primary-title>
                 <div>
@@ -64,6 +64,7 @@ export default {
   data () {
     return {
       listings: null,
+      listingImages: null,
       error: null,
       url: `/static/images/${this.$store.state.route.params.propertyId}.jpeg`
     }
@@ -75,6 +76,8 @@ export default {
     async getProperties (){
       let response = await PropertyServices.fetchProperties()
       this.listings = response.data.property
+      this.listingImages = response.data.image_list
+      console.log(response.data.image_list)
     },
     async bookmark(propertyId) {
       let userId = this.$store.state.id

@@ -15,8 +15,8 @@ module.exports = {
       })
     } else {
       try {
-        const newProperty = await Property.create(req.body)
-        const fileObject = {
+        let newProperty = await Property.create(req.body)
+        let fileObject = {
           listing_id: newProperty.id
         }
         // attaching file names to Images model. ~
@@ -24,7 +24,7 @@ module.exports = {
           let x = 'image_' + i
           fileObject[x] = req.files[i].destination + req.files[i].filename
         }
-        const imageLocations = await Images.create(fileObject)
+        let imageLocations = await Images.create(fileObject)
         res.send({
           msg: 'New property created',
           a: newProperty,
@@ -40,9 +40,23 @@ module.exports = {
   // List all properties
   async listAll (req, res) {
     try {
-      const results = await Property.findAll({
+      let results = await Property.findAll({
         limit: 30
       })
+      let propertyIds = []
+      results.forEach((x) => {
+        propertyIds.push(x.id)
+      })
+      let imagePaths = await Images.findAll({
+        where: {
+          id: propertyIds
+        }
+      })
+
+      for (let i = 0; i < results.length; i++) {
+        results[i].main_image_path = imagePaths[i].image_0
+      }
+
       res.send({
         msg: 'All properties',
         property: results
@@ -56,7 +70,7 @@ module.exports = {
   // Throws back property by ID
   async findPropertyById (req, res) {
     try {
-      const result = await Property.findOne({
+      let result = await Property.findOne({
         where: {
           id: req.body.id
         }
@@ -65,7 +79,7 @@ module.exports = {
         msg: 'Found one',
         property: result
       })
-      const currentViews = result.dataValues.listing_views + 1
+      let currentViews = result.dataValues.listing_views + 1
       result.update({
         listing_views: currentViews
       })
