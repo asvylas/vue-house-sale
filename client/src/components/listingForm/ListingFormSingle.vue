@@ -2,12 +2,14 @@
 <v-layout>
   <v-flex xs12>
       <v-stepper v-model="e6" vertical>
+
         <v-stepper-step step="1" v-bind:complete="e6 > 1">
           Basic information
           <small>Good start is half the job</small>
         </v-stepper-step>
         <v-stepper-content step="1">
-                      <v-text-field
+
+                <v-text-field
                   name="input-1"
                   label="Name"
                   type="text"
@@ -50,13 +52,17 @@
 
         <v-stepper-step step="2" v-bind:complete="e6 > 2">
           Upload the photos of it
-          <small>People will be thrilled to see how it looks</small></v-stepper-step>
+          <small>People will be thrilled to see how it looks</small>
+        </v-stepper-step>
         <v-stepper-content step="2">
           <v-card class="mb-5" 
           height="200px"
           v-for="image in imageURL"
+          :key="image"
           >
-          <img :src="image" alt="" height="200px">
+          <img :src="image" 
+          alt="" height="200px"
+          >
           </v-card>
           <input 
           type="file" 
@@ -93,7 +99,7 @@
 <script>
 import PropertyServices from '@/services/PropertyServices'
 export default {
-  name: 'listingFormPhotoPanel',
+  name: 'ListingFormSingle',
   data () {
     return {
       e6: 1,

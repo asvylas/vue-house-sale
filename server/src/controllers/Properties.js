@@ -24,11 +24,11 @@ module.exports = {
           let x = 'image_' + i
           fileObject[x] = req.files[i].destination + req.files[i].filename
         }
-        let imageLocations = await Images.create(fileObject)
+        let newImagePaths = await Images.create(fileObject)
         res.send({
           msg: 'New property created',
           a: newProperty,
-          b: imageLocations
+          b: newImagePaths
         })
       } catch (err) {
         res.status(400).send({

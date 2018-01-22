@@ -2,7 +2,7 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap>
       <v-flex d-flex xs12>
-        <listing-form-photos-panel/>
+        <listing-form-single/>
       </v-flex>
     </v-layout>
     </v-container>
@@ -10,13 +10,11 @@
 
 <script>
 import PropertyServices from '@/services/PropertyServices'
-import listingFormTextPanel from '@/components/listingForm/listingFormTextPanel'
-import listingFormPhotosPanel from '@/components/listingForm/listingFormPhotosPanel'
+import listingFormSingle from '@/components/listingForm/ListingFormSingle'
 export default {
   name: 'ListingForm',
   components: {
-    listingFormTextPanel,
-    listingFormPhotosPanel
+    listingFormSingle
   },
   data () {
     return {

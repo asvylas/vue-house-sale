@@ -86,7 +86,7 @@ export default {
       } else {
         let response = await BookmarkServices.bookmarkProperty(userId, propertyId)
         if(response.data.result === true) {
-          console.log('Hi MOM')
+          console.log('Update the UI DUMBASS')
         }
       }
     }
