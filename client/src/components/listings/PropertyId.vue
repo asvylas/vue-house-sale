@@ -99,7 +99,6 @@ export default {
           })
         this.listing = response.data.property
 
-        let correctURL = new RegExp('.')
         let imageObj = response.data.imagePaths
 
         for (let i = 0; i < 6; i++) {

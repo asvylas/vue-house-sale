@@ -42,7 +42,6 @@
           </v-flex>
         </v-layout>
       </v-container>
-
   </v-layout>
 </template>
 

@@ -1,5 +1,4 @@
 <template>
-  <v-parallax src="./static/inimages/index.jpeg" height="800" id="index-img">
     <v-layout
       column
       align-center
@@ -16,7 +15,6 @@
         Find it right now!
       </v-btn>
     </v-layout>
-  </v-parallax>
 </template>
 
 <script>
@@ -31,8 +29,5 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-#index-img {
-  box-shadow: 0px 0px 20px 1px rgba(135,83,135,0.37);
-}
+<style>
 </style>
