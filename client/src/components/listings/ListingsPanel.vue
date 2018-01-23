@@ -77,7 +77,6 @@ export default {
       let response = await PropertyServices.fetchProperties()
       this.listings = response.data.property
       this.listingImages = response.data.image_list
-      console.log(response.data.image_list)
     },
     async bookmark(propertyId) {
       let userId = this.$store.state.id

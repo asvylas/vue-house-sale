@@ -75,9 +75,16 @@ module.exports = {
           id: req.body.id
         }
       })
+      let imagePaths = await Images.findOne({
+        where: {
+          listing_id: req.body.id
+        }
+      })
       res.send({
         msg: 'Found one',
-        property: result
+        property: result,
+        imagePaths: imagePaths
+
       })
       let currentViews = result.dataValues.listing_views + 1
       result.update({

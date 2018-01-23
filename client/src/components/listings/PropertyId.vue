@@ -4,10 +4,13 @@
   <v-layout column>
 
     <v-flex xs10 offset-xs1>
-      <v-card>
-        <v-card-media id='media-card' v-bind:src="this.url" height="300px">
-        </v-card-media>
-      </v-card>
+      <!-- Problem with the first image 
+      display as blank after load, 
+      will look into it later, for 
+      now this is done. ~ -->
+      <v-carousel id="media-card">
+        <v-carousel-item height="200px" v-for="item in imagePaths" v-bind:src="baseURL + item" :key="item" ></v-carousel-item>
+      </v-carousel>
     </v-flex>
   </v-layout>
 
@@ -82,27 +85,36 @@ export default {
   name: 'PropertyId',
   data () {
     return {
+      baseURL: 'http://localhost:8082/',
       id: this.$store.state.route.params.propertyId,
-      listing: null,
-      url: `/static/images/${this.$store.state.route.params.propertyId}.jpeg`
+      listing: '',
+      imagePaths: []
     }
   },
   async mounted () {
     // Fetching data
     try {
-        const id = this.$store.state.route.params.propertyId
-        const response = await PropertyServices.fetchById({
-          id: id
+        let response = await PropertyServices.fetchById({
+          id: this.id
           })
         this.listing = response.data.property
+
+        let correctURL = new RegExp('.')
+        let imageObj = response.data.imagePaths
+
+        for (let i = 0; i < 6; i++) {
+          if(/uploads*/.test(imageObj[`image_${i}`])) {
+            this.imagePaths.push(imageObj[`image_${i}`])
+          }
+        }
     } catch (error) {
         console.log('Error occured')
     }
 
     // Resizing google view || Need to remake this. ~
-    // window.addEventListener('resize', () => {
-    //  GoogleApi.googleMapsResize() 
-    //  })
+    window.addEventListener('resize', () => {
+     GoogleApi.googleMapsResize() 
+     })
     // Runs once mounting is fully done
     this.$nextTick(function () {
       GoogleApi.googleSetSRC(this.listing)
