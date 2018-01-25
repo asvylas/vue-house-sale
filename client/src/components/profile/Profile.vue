@@ -19,9 +19,41 @@
             Bookmarks
           </v-toolbar-title>
         </v-toolbar>
-          <div class="pl-4 pr-4 pt-2 pb-2" v-for="item in this.bookmarkList" :key='item.id'>
-            <span>{{item}}</span> <br>
-          </div>
+
+         <v-container fluid grid-list-md class="grey lighten-4">
+          <v-layout row wrap>
+            <v-flex
+              v-for="property in bookmarkList"
+              :key="property.id">
+              <v-card>
+                <v-card-media v-bind:src="`http://localhost:8082/${property.main_image_path}`" height="200px">
+                </v-card-media>
+                <v-card-title primary-title>
+                  <div>
+                    <h3 class="headline mb-0">{{property.name_of_listing}}</h3>
+                    <span>City: {{property.city}}</span><br>
+                    <span>Address: {{property.street}} {{property.house_number}}</span><br>
+                    <span>Views: {{property.listing_views}}</span>
+                  </div>
+                </v-card-title>
+                <v-card-actions>
+                  <v-btn fab small color="primary" 
+                    @click="() => {$router.push(`/listings/${property.id}`)}">
+                    <v-icon dark>pageview</v-icon></v-btn>
+                  <v-btn fab small dark 
+                    @click="bookmark(property.id)"
+                    color="primary">
+                    <v-icon dark>favorite</v-icon>
+                  </v-btn>
+                  <v-btn fab small dark color="primary">
+                    <v-icon dark>share</v-icon>
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-flex>
+          </v-layout>
+        </v-container>
+        
         </div>
     </v-flex>
   </v-layout>

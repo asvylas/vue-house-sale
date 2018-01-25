@@ -21,9 +21,8 @@
           <v-flex
             v-for="property in listings"
             :key="property.id">
-
             <v-card>
-              <v-card-media v-bind:src="`http://localhost:8082/${property.main_image_path}`" height="300px">
+              <v-card-media v-bind:src="`http://localhost:8082/${property.main_image_path}`" height="200px">
               </v-card-media>
               <v-card-title primary-title>
                 <div>
@@ -47,7 +46,6 @@
                 </v-btn>
               </v-card-actions>
             </v-card>
-
           </v-flex>
         </v-layout>
       </v-container>
