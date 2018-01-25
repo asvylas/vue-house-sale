@@ -9,7 +9,7 @@
       <v-text-field hide-details 
         single-line
         name="input-1"
-        v-model="searchBar"
+        v-model.lazy.trim="searchBar"
         @input="searchProperties">
         </v-text-field>
 

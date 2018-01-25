@@ -1,6 +1,9 @@
 const {
   User
 } = require('../models')
+const {
+  SubscribeList
+} = require('../models')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 
@@ -28,11 +31,11 @@ module.exports = {
   // Logging in the user and providing a jwt-token
   async login (req, res) {
     try {
-      const {
+      let {
         email,
         password
       } = req.body
-      const user = await User.findOne({
+      let user = await User.findOne({
         where: {
           email: email
         }
@@ -43,18 +46,24 @@ module.exports = {
         })
       }
 
-      const checkPassword = await user.comparePassword(password)
+      let checkPassword = await user.comparePassword(password)
       if (checkPassword === false) {
         return res.status(403).send({
           error: 'Invalid password'
         })
       }
 
-      const resUser = user.toJSON()
+      let resUser = user.toJSON()
+      let userBookmarks = await SubscribeList.findAll({
+        where: {
+          user_id: resUser.id
+        }
+      })
       res.send({
         user: resUser.email,
         id: resUser.id,
-        token: jwtSignUser(resUser)
+        token: jwtSignUser(resUser),
+        userBookmarks: userBookmarks
       })
     } catch (err) {
       res.status(500).send({

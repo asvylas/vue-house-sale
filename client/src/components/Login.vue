@@ -55,6 +55,8 @@ export default {
             this.$store.dispatch('setToken', response.data.token)
             this.$store.dispatch('setUser', response.data.user)
             this.$store.dispatch('setId', response.data.id)
+            this.$store.dispatch('setUserbookmarks', response.data.userBookmarks)
+            console.log(this.$store.state.userBookmarks)
             this.$router.push('/')
           } else {
             this.alert = true

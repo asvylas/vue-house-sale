@@ -10,7 +10,8 @@ new Vuex.Store({
     user: null,
     id: null,
     token: null,
-    userLoggedIn: false
+    userLoggedIn: false,
+    userBookmarks: null
   },
   mutations: {
     setToken (state, token) {
@@ -26,6 +27,9 @@ new Vuex.Store({
     },
     setId (state, id) {
       state.id = id
+    },
+    setUserBookmarks (state, userBookmarks) {
+      state.userBookmarks = userBookmarks
     },
     logoutUser (state) {
       state.user = null
@@ -43,6 +47,9 @@ new Vuex.Store({
     },
     setId ({commit}, id) {
       commit('setId', id)
+    },
+    setUserbookmarks ({commit}, userBookmarks) {
+      commit('setUserBookmarks', userBookmarks)
     },
     logoutUser ({commit}) {
       commit('logoutUser')

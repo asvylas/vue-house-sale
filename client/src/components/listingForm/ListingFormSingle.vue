@@ -47,7 +47,7 @@
                 ></v-text-field>
                 
           <v-btn color="primary" @click.native="e6 = 2">Continue</v-btn>
-          <v-btn flat>Cancel</v-btn>
+          <v-btn flat @click='Cancel'>Cancel</v-btn>
         </v-stepper-content>
 
         <v-stepper-step step="2" v-bind:complete="e6 > 2">
@@ -55,15 +55,22 @@
           <small>People will be thrilled to see how it looks</small>
         </v-stepper-step>
         <v-stepper-content step="2">
-          <v-card class="mb-5" 
-          height="200px"
-          v-for="image in imageURL"
-          :key="image"
-          >
-          <img :src="image" 
-          alt="" height="200px"
-          >
-          </v-card>
+           <v-container fluid>
+              <v-layout row wrap>
+                <v-flex 
+                class="mb-5" 
+                  v-for="image in imageURL"
+                  :key="image">
+                    
+                      <img :src="image" 
+                      alt="" height="200px"
+                      class="uploadImgs"
+                      >
+                    
+              </v-flex>
+            </v-layout>
+          </v-container>
+          
           <input 
           type="file" 
           multiple 
@@ -73,7 +80,7 @@
           @change="filesSelected">
           <v-btn color="primary" @click="triggerFileBrowser">Upload files</v-btn>
           <v-btn color="primary" @click.native="e6 = 3">Continue</v-btn>
-          <v-btn flat>Cancel</v-btn>
+          <v-btn flat @click='Cancel'>Cancel</v-btn>
         </v-stepper-content>
 
         <v-stepper-step step="3" v-bind:complete="e6 > 3">
@@ -88,7 +95,7 @@
                   v-model="description"
                 ></v-text-field>
           <v-btn color="primary" @click="sendData">Continue</v-btn>
-          <v-btn flat>Cancel</v-btn>
+          <v-btn flat @click='Cancel'>Cancel</v-btn>
         </v-stepper-content>
 
       </v-stepper>
@@ -132,6 +139,9 @@ export default {
       } catch (error) {
         console.log(error.response)
       }
+    },
+    Cancel(){
+      this.$router.push('/listings')
     },
     triggerFileBrowser() {
       this.$refs.browseFiles.click()
@@ -181,5 +191,11 @@ export default {
 </script>
 
 <style scoped>
+img.uploadImgs{
+  -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+
+}
 
 </style>
