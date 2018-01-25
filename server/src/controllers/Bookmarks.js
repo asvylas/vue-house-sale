@@ -7,18 +7,31 @@ module.exports = {
 
   async addNewBookmark (req, res) {
     try {
-      const newBookmark = {}
+      let newBookmark = {}
       newBookmark.listing_id = req.body.propertyId
       newBookmark.user_id = req.body.userId
-      console.log(newBookmark)
-      await SubscribeList.create(newBookmark)
-      res.send({
-        msg: 'Bookmarked',
-        result: true
+
+      let checkForDub = await SubscribeList.findAll({
+        where: {
+          listing_id: req.body.propertyId,
+          user_id: req.body.userId
+        }
       })
+      console.log(checkForDub)
+      if (checkForDub.length > 0) {
+        res.status(200).send({
+          error: 'Already bookmarked.'
+        })
+      } else {
+        await SubscribeList.create(newBookmark)
+        res.send({
+          msg: 'Bookmarked',
+          result: true
+        })
+      }
     } catch (err) {
       res.status(400).send({
-        error: 'Error getting the requested property',
+        error: 'Something went wrong.',
         result: false
       })
     }
@@ -29,14 +42,17 @@ module.exports = {
         where: {
           user_id: req.params.id
         }
+      }, {raw: true})
+      let propertyIds = []
+      response.map((x) => {
+        propertyIds.push(x.listing_id)
       })
-      console.log(response)
       res.send({
-        result: response
+        result: propertyIds
       })
     } catch (err) {
       res.status(400).send({
-        error: 'a'
+        error: 'No bookmarks found.'
       })
     }
   }
