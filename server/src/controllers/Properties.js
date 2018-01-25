@@ -30,6 +30,15 @@ module.exports = {
           a: newProperty,
           b: newImagePaths
         })
+
+        Property.update({
+          main_image_path: newImagePaths.image_0
+        },
+        {
+          where: {
+            id: newProperty.id
+          }
+        })
       } catch (err) {
         res.status(400).send({
           error: 'Error creating the property'
@@ -47,15 +56,6 @@ module.exports = {
       results.forEach((x) => {
         propertyIds.push(x.id)
       })
-      let imagePaths = await Images.findAll({
-        where: {
-          id: propertyIds
-        }
-      })
-
-      for (let i = 0; i < results.length; i++) {
-        results[i].main_image_path = imagePaths[i].image_0
-      }
 
       res.send({
         msg: 'All properties',

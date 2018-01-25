@@ -1,6 +1,9 @@
 const {
   SubscribeList
 } = require('../models')
+const {
+  Property
+} = require('../models')
 
 module.exports = {
   // Find a specific property
@@ -43,12 +46,21 @@ module.exports = {
           user_id: req.params.id
         }
       }, {raw: true})
+
       let propertyIds = []
-      response.map((x) => {
+
+      response.forEach((x) => {
         propertyIds.push(x.listing_id)
       })
+
+      let bookmarkedProperties = await Property.findAll({
+        where: {
+          id: propertyIds
+        }
+      })
+
       res.send({
-        result: propertyIds
+        result: bookmarkedProperties
       })
     } catch (err) {
       res.status(400).send({
