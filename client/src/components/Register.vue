@@ -72,7 +72,7 @@ export default {
 
           if (response.data.msg) {
             setTimeout( ()=> {
-              this.$router.push('/')
+              this.$router.push('/login')
             }, 3000)
           }
           

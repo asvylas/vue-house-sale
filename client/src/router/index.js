@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
+import Profile from '@/components/profile/Profile'
 import Listings from '@/components/listings/Listings'
 import ListingForm from '@/components/listingForm/ListingForm'
 import PropertyId from '@/components/listings/PropertyId'
@@ -26,6 +27,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/profile/:id',
+      name: 'Profile',
+      component: Profile
     },
     {
       path: '/listings',

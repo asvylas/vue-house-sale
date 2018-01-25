@@ -21,6 +21,12 @@
       flat 
       dark>Register</v-btn>
     </router-link>
+    <router-link dark :to="{ path: `/profile/${this.$store.state.id}` }">
+      <v-btn 
+      v-if="$store.state.userLoggedIn"
+      flat
+      dark>Profile</v-btn>
+    </router-link>
     <router-link dark to="/logout">
       <v-btn 
       v-if="$store.state.userLoggedIn"
@@ -37,7 +43,7 @@ export default {
   name: 'Header',
   data () {
     return {
-      drawer: null
+      drawer: null,
     }
   },
   props: {

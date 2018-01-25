@@ -111,7 +111,7 @@ export default {
     }
 
     // Resizing google view || Need to remake this. ~
-    window.addEventListener('resize', () => {
+    document.addEventListener('resize', () => {
      GoogleApi.googleMapsResize() 
      })
     // Runs once mounting is fully done
@@ -119,6 +119,11 @@ export default {
       GoogleApi.googleSetSRC(this.listing)
     })
   },
+  beforeDestroy() {
+    document.removeEventListener('resize', () => {
+     GoogleApi.googleMapsResize() 
+    });
+},
   methods: {
     googleMapsDisplay(){
       GoogleApi.googleMapsDisplay()

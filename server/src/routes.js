@@ -52,4 +52,7 @@ module.exports = (app) => {
 
   app.post('/bookmarks',
     Bookmarks.addNewBookmark)
+
+  app.get('/bookmarks/:id',
+    Bookmarks.getUserBookmakrs)
 }

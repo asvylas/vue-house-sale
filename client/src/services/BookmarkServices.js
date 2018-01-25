@@ -2,9 +2,13 @@ import Api from '@/services/Api'
 
 export default {
   bookmarkProperty (userId, propertyId) {
-    return Api().post('bookmarks', userId, propertyId)
+    const properties = {
+      userId: userId,
+      propertyId: propertyId
+    }
+    return Api().post('bookmarks', properties)
   },
-  getBookmarkedProperties (userId, propertyId) {
-    return Api().get('bookmarks', userId, propertyId)
+  getBookmarkedProperties (id) {
+    return Api().get(`bookmarks/${id}`)
   }
 }
