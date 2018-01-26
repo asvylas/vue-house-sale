@@ -2,12 +2,12 @@ import ApiKeys from '@/config/config'
 
 export default {
   googleMapsResize () {
-    const mediaCard = document.getElementById('media-card')
+    const mediaCard = document.getElementById('main-card')
     const googleMapsWindow = document.getElementById('google-maps-view')
     googleMapsWindow.width = mediaCard.clientWidth - 6
   },
   googleMapsDisplay () {
-    const mediaCard = document.getElementById('media-card')
+    const mediaCard = document.getElementById('main-card')
     const googleMapsWindow = document.getElementById('google-maps-view')
     const googleMapsCard = document.getElementById('google-maps-card')
     googleMapsWindow.width = mediaCard.clientWidth - 6

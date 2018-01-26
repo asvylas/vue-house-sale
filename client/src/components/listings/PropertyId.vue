@@ -2,19 +2,22 @@
 <v-container fluid>
 
   <v-layout column>
-
     <v-flex xs10 offset-xs1 >
-
-
-      <v-card id="media-card">
-        <img  name="imagecontainer" alt="Images in carousel" height="500px">
-      </v-card>
+      <div >
+        <v-card-media
+        id="media-card"
+          v-bind:src="'http://localhost:8082/' + this.imagePaths[3]"
+          height="500px"
+        >
+        </v-card-media>
+      </div>
+      
     </v-flex>
   </v-layout>
 
   <v-layout row> 
     <v-flex xs10 offset-xs1>
-      <v-card>
+      <v-card id="main-card">
 
         <v-card-title primary-title class="text-md-center">
             <v-layout wrap>
@@ -86,8 +89,7 @@ export default {
       baseURL: 'http://localhost:8082/',
       id: this.$store.state.route.params.propertyId,
       listing: '',
-      imagePaths: [],
-      startingPoint: 0
+      imagePaths: []
     }
   },
   async mounted () {
@@ -97,28 +99,20 @@ export default {
           id: this.id
           })
         this.listing = response.data.property
-
         let imageObj = response.data.imagePaths
-
         for (let i = 0; i < 6; i++) {
           if(/uploads*/.test(imageObj[`image_${i}`])) {
             this.imagePaths.push(imageObj[`image_${i}`])
           }
-
         }
     } catch (error) {
         console.log('Error occured')
     }
-
-    // Resizing google view || Need to remake this. ~
     document.addEventListener('resize', () => {
      GoogleApi.googleMapsResize()
-     document.imagecontainer.length = 600
      })
-    // Runs once mounting is fully done
     this.$nextTick(function () {
       GoogleApi.googleSetSRC(this.listing)
-      this.imageCarousel()
       
     })
   },
@@ -131,18 +125,18 @@ export default {
     googleMapsDisplay(){
       GoogleApi.googleMapsDisplay()
     },
-    imageCarousel(){
-      document.imagecontainer.src= this.baseURL + this.imagePaths[this.startingPoint]
-      console.log(this.imagePaths[this.startingPoint])
-      if(this.startingPoint < this.imagePaths.length -1){
-        this.startingPoint = this.startingPoint + 1
-      } else {
-        this.startingPoint = 0
-      }
-      setTimeout(()=>{
-        this.imageCarousel()
-      }, 3000)
-    }
+    // imageCarousel(){
+    //   document.imagecontainer.src= this.baseURL + this.imagePaths[this.startingPoint]
+    //   console.log(this.imagePaths[this.startingPoint])
+    //   if(this.startingPoint < this.imagePaths.length -1){
+    //     this.startingPoint = this.startingPoint + 1
+    //   } else {
+    //     this.startingPoint = 0
+    //   }
+    //   setTimeout(()=>{
+    //     this.imageCarousel()
+    //   }, 3000)
+    // }
 
   }
 }
