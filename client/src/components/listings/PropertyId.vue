@@ -3,14 +3,12 @@
 
   <v-layout column>
 
-    <v-flex xs10 offset-xs1>
-      <!-- Problem with the first image 
-      display as blank after load, 
-      will look into it later, for 
-      now this is done. ~ -->
-      <v-carousel id="media-card">
-        <v-carousel-item height="200px" v-for="item in imagePaths" v-bind:src="baseURL + item" :key="item" ></v-carousel-item>
-      </v-carousel>
+    <v-flex xs10 offset-xs1 >
+
+
+      <v-card id="media-card">
+        <img  name="imagecontainer" alt="Images in carousel" height="500px">
+      </v-card>
     </v-flex>
   </v-layout>
 
@@ -23,10 +21,10 @@
               <v-flex class="text-sm-left">
                 <div>
                   <h3 class="headline mb-0">{{this.listing.name_of_listing}}</h3>
-                  <span>{{this.listing.city}}</span><br>
-                  <span>{{this.listing.street}}, {{this.listing.house_number}}</span><br>
-                  <span>{{this.listing.type_of_building}}</span><br>
-                  <span>{{this.listing.listed_by_user}}</span><br>
+                  <span>City: {{this.listing.city}}</span><br>
+                  <span>Address: {{this.listing.street}}, {{this.listing.house_number}}</span><br>
+                  <span>Building type:{{this.listing.type_of_building}}</span><br>
+                  <span>Posted by:{{this.listing.listed_by_user}}</span><br>
                   <span>Views: {{this.listing.listing_views}}</span>
                 </div>
               </v-flex>
@@ -88,7 +86,8 @@ export default {
       baseURL: 'http://localhost:8082/',
       id: this.$store.state.route.params.propertyId,
       listing: '',
-      imagePaths: []
+      imagePaths: [],
+      startingPoint: 0
     }
   },
   async mounted () {
@@ -105,6 +104,7 @@ export default {
           if(/uploads*/.test(imageObj[`image_${i}`])) {
             this.imagePaths.push(imageObj[`image_${i}`])
           }
+
         }
     } catch (error) {
         console.log('Error occured')
@@ -112,11 +112,14 @@ export default {
 
     // Resizing google view || Need to remake this. ~
     document.addEventListener('resize', () => {
-     GoogleApi.googleMapsResize() 
+     GoogleApi.googleMapsResize()
+     document.imagecontainer.length = 600
      })
     // Runs once mounting is fully done
     this.$nextTick(function () {
       GoogleApi.googleSetSRC(this.listing)
+      this.imageCarousel()
+      
     })
   },
   beforeDestroy() {
@@ -127,13 +130,29 @@ export default {
   methods: {
     googleMapsDisplay(){
       GoogleApi.googleMapsDisplay()
+    },
+    imageCarousel(){
+      document.imagecontainer.src= this.baseURL + this.imagePaths[this.startingPoint]
+      console.log(this.imagePaths[this.startingPoint])
+      if(this.startingPoint < this.imagePaths.length -1){
+        this.startingPoint = this.startingPoint + 1
+      } else {
+        this.startingPoint = 0
+      }
+      setTimeout(()=>{
+        this.imageCarousel()
+      }, 3000)
     }
+
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+v-card#media-card{
+  height: 500px;
+}
 #sharebtn{
   margin-right: 52px;
 }

@@ -32,7 +32,8 @@ module.exports = {
         })
 
         Property.update({
-          main_image_path: newImagePaths.image_0
+          main_image_path: newImagePaths.image_0,
+          listing_views: 0
         },
         {
           where: {
