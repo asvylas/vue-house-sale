@@ -23,13 +23,18 @@ module.exports = {
       console.log(checkForDub)
       if (checkForDub.length > 0) {
         res.status(200).send({
-          error: 'Already bookmarked.'
+          msg: 'Unbookmarked.'
+        })
+        SubscribeList.destroy({
+          where: {
+            listing_id: req.body.propertyId,
+            user_id: req.body.userId
+          }
         })
       } else {
         await SubscribeList.create(newBookmark)
         res.send({
-          msg: 'Bookmarked',
-          result: true
+          msg: 'Bookmarked.'
         })
       }
     } catch (err) {

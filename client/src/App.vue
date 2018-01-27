@@ -25,13 +25,6 @@ export default {
 </script>
 
 <style>
-main{
-  background: url("/static/inimages/bg2pattern.svg") no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
 div.container.grey.lighten-4.fluid.grid-list-md{
    background: url("/static/inimages/bg2pattern.svg") no-repeat center center fixed; 
   -webkit-background-size: cover;

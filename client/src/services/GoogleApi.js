@@ -4,13 +4,13 @@ export default {
   googleMapsResize () {
     const mediaCard = document.getElementById('main-card')
     const googleMapsWindow = document.getElementById('google-maps-view')
-    googleMapsWindow.width = mediaCard.clientWidth - 6
+    googleMapsWindow.width = mediaCard.clientWidth
   },
   googleMapsDisplay () {
     const mediaCard = document.getElementById('main-card')
     const googleMapsWindow = document.getElementById('google-maps-view')
     const googleMapsCard = document.getElementById('google-maps-card')
-    googleMapsWindow.width = mediaCard.clientWidth - 6
+    googleMapsWindow.width = mediaCard.clientWidth
     if (googleMapsCard.className === '' || null) {
       googleMapsCard.className = 'hidden'
     } else {

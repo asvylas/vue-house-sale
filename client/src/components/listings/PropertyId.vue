@@ -3,7 +3,7 @@
 
   <v-layout column>
     <v-flex xs10 offset-xs1 >
-      <div >
+      <div id="main-card">
         <v-card-media
         id="media-card"
           v-bind:src="'http://localhost:8082/' + this.currentImage"
@@ -32,7 +32,7 @@
 
   <v-layout row> 
     <v-flex xs10 offset-xs1>
-      <v-card id="main-card">
+      <v-card >
 
         <v-card-title primary-title class="text-md-center">
             <v-layout wrap>
@@ -59,7 +59,8 @@
 
           <v-btn color="primary" class="btnx" 
           v-if="this.$store.state.userLoggedIn"
-          dark small absolute top right fab>
+          dark small absolute top right fab
+          @click="()=>{this.bookmark(this.listing.id)}">
              <v-icon>favorite</v-icon>
           </v-btn>
           <v-btn id="sharebtn" class="btnx" color="primary" dark small absolute top right fab>
@@ -100,6 +101,7 @@
 <script>
 import GoogleApi from '@/services/GoogleApi'
 import PropertyServices from '@/services/PropertyServices'
+import BookmarkServices from '@/services/BookmarkServices'
 export default {
   name: 'PropertyId',
   data () {
@@ -119,6 +121,7 @@ export default {
           id: this.id
           })
         this.listing = response.data.property
+        console.log(this.listing)
         let imageObj = response.data.imagePaths
         for (let i = 0; i < 6; i++) {
           if(/uploads*/.test(imageObj[`image_${i}`])) {
@@ -149,6 +152,16 @@ export default {
   methods: {
     googleMapsDisplay(){
       GoogleApi.googleMapsDisplay()
+    },
+      async bookmark(propertyId) {
+      let userId = this.$store.state.id
+      if (userId === null || undefined || '') {
+        return this.error = 'Login to bookmark'
+      } else {
+        let response = await BookmarkServices.bookmarkProperty(userId, propertyId)
+        if(response.data.result === true) {
+        }
+      }
     },
     setImage(val){
       this.currentImage = this.imagePaths[this.imagePosition]

@@ -76,6 +76,16 @@ export default {
     console.log(response)
   },
   methods: {
+    async bookmark(propertyId) {
+      let userId = this.$store.state.id
+      if (userId === null || undefined || '') {
+        return this.error = 'Login to bookmark'
+      } else {
+        let response = await BookmarkServices.bookmarkProperty(userId, propertyId)
+        if(response.data.result === true) {
+        }
+      }
+    }
   }
 }
 </script>
