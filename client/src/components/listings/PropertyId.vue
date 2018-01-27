@@ -6,7 +6,7 @@
       <div >
         <v-card-media
         id="media-card"
-          v-bind:src="'http://localhost:8082/' + this.imagePaths[3]"
+          v-bind:src="'http://localhost:8082/' + this.currentImage"
           height="500px"
         >
         </v-card-media>
@@ -39,6 +39,20 @@
         </v-card-title>
 
         <v-card-actions>
+
+          <v-btn color="white" class="btnx" id="leftbbb"
+          light small absolute 
+          @click="changeImg(-1)"
+          top left fab>
+             <v-icon>keyboard_arrow_left</v-icon>
+          </v-btn>
+          <v-btn color="white" class="btnx" id="rightbbb"
+          light small 
+          @click="changeImg(1)"
+          absolute top right fab>
+             <v-icon>keyboard_arrow_right</v-icon>
+          </v-btn>
+
           <v-btn color="primary" class="btnx" 
           v-if="this.$store.state.userLoggedIn"
           dark small absolute top right fab>
@@ -89,7 +103,9 @@ export default {
       baseURL: 'http://localhost:8082/',
       id: this.$store.state.route.params.propertyId,
       listing: '',
-      imagePaths: []
+      imagePaths: [],
+      currentImage: null,
+      imagePosition: 0
     }
   },
   async mounted () {
@@ -105,15 +121,18 @@ export default {
             this.imagePaths.push(imageObj[`image_${i}`])
           }
         }
+        
     } catch (error) {
         console.log('Error occured')
+    }
+    if (this.imagePaths.length > 0) {
+      this.changeImg()
     }
     document.addEventListener('resize', () => {
      GoogleApi.googleMapsResize()
      })
-    this.$nextTick(function () {
+    this.$nextTick(()=> {
       GoogleApi.googleSetSRC(this.listing)
-      
     })
   },
   beforeDestroy() {
@@ -125,19 +144,14 @@ export default {
     googleMapsDisplay(){
       GoogleApi.googleMapsDisplay()
     },
-    // imageCarousel(){
-    //   document.imagecontainer.src= this.baseURL + this.imagePaths[this.startingPoint]
-    //   console.log(this.imagePaths[this.startingPoint])
-    //   if(this.startingPoint < this.imagePaths.length -1){
-    //     this.startingPoint = this.startingPoint + 1
-    //   } else {
-    //     this.startingPoint = 0
-    //   }
-    //   setTimeout(()=>{
-    //     this.imageCarousel()
-    //   }, 3000)
-    // }
-
+    changeImg(val){
+      this.currentImage = this.imagePaths[this.imagePosition]
+      if( this.imagePosition < this.imagePaths.length) {
+        this.imagePosition++
+      } else {
+        this.imagePosition = 0
+      }
+    }
   }
 }
 </script>
@@ -155,6 +169,12 @@ v-card#media-card{
 }
 #placebtn{
   margin-right: 152px;
+}
+v-btn#leftbbb{
+  margin-right: 152px !important;
+}
+v-btn#rightbbb{
+  margin-bottom: 152px !important;
 }
 .hidden{
   display: none;
