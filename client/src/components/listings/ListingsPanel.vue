@@ -19,7 +19,7 @@
       <v-container fluid grid-list-md class="grey lighten-4">
         <v-layout row wrap>
           <v-flex
-            v-for="property in listings"
+            v-for="property in listingList"
             :key="property.id">
             <v-card>
               <v-card-media v-bind:src="`http://localhost:8082/${property.main_image_path}`" height="200px">
@@ -35,13 +35,26 @@
               <v-card-actions>
                 <v-btn fab small color="primary" 
                   @click="() => {$router.push(`/listings/${property.id}`)}">
-                  <v-icon dark>pageview</v-icon></v-btn>
+                  <v-icon dark>pageview</v-icon>
+                </v-btn>
+
+                  <v-btn fab small dark
+                  v-if="property.bookmarked"
+                  @click="bookmark(property.id)"
+                  color="red">
+                  <v-icon dark>favorite</v-icon>
+                </v-btn>
+
                 <v-btn fab small dark 
                   @click="bookmark(property.id)"
+                  v-else
                   color="primary">
                   <v-icon dark>favorite</v-icon>
                 </v-btn>
-                <v-btn fab small dark color="primary">
+                
+                <v-btn fab small dark 
+                  @click="bookmark(property.id)"
+                  color="primary">
                   <v-icon dark>share</v-icon>
                 </v-btn>
               </v-card-actions>
@@ -64,17 +77,35 @@ export default {
       listings: null,
       listingImages: null,
       error: null,
+      bookmarkList: null,
+      listingList: null,
       url: `/static/images/${this.$store.state.route.params.propertyId}.jpeg`
     }
   },
   mounted(){
-        this.getProperties ()
+    this.getProperties ()
+    this.getBookmarks ()
     },
   methods: {
     async getProperties (){
       let response = await PropertyServices.fetchProperties()
       this.listings = response.data.property
       this.listingImages = response.data.image_list
+    },
+    async getBookmarks(){
+      if(this.$store.state.id != null) {
+      let response = await BookmarkServices.getBookmarkedProperties(this.$store.state.id)
+      this.bookmarkList = this.listings
+      for(let i = 0; i < response.data.result.length; i++){
+        this.bookmarkList.forEach(element => {
+          if(element.id === response.data.result[i].id) {
+            element.bookmarked = true
+          }
+        })
+        this.listingList = this.bookmarkList
+      }
+      console.log(this.listings)
+      }
     },
     async bookmark(propertyId) {
       let userId = this.$store.state.id
@@ -86,6 +117,8 @@ export default {
           console.log('Update the UI DUMBASS')
         }
       }
+      this.getProperties ()
+      this.getBookmarks ()
     }
   }
 }

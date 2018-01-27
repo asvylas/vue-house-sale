@@ -42,7 +42,7 @@
                     <v-icon dark>pageview</v-icon></v-btn>
                   <v-btn fab small dark 
                     @click="bookmark(property.id)"
-                    color="primary">
+                    color="red">
                     <v-icon dark>favorite</v-icon>
                   </v-btn>
                   <v-btn fab small dark color="primary">
@@ -85,6 +85,8 @@ export default {
         if(response.data.result === true) {
         }
       }
+      let response = await BookmarkServices.getBookmarkedProperties(this.$store.state.id)
+      this.bookmarkList = response.data.result
     }
   }
 }

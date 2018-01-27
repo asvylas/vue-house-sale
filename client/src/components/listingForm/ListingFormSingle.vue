@@ -185,6 +185,11 @@ export default {
       XHR.onload = function (e) {
       }
       XHR.send(FD)
+      XHR.onreadystatechange = function () {
+        if(XHR.readyState === XMLHttpRequest.DONE && XHR.status === 200) {
+          this.$router.push('/listings')
+        }
+      }
     }
   }
 }

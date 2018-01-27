@@ -114,32 +114,14 @@ export default {
       imagePosition: 0
     }
   },
-  async mounted () {
+  mounted () {
     // Fetching data
-    try {
-        let response = await PropertyServices.fetchById({
-          id: this.id
-          })
-        this.listing = response.data.property
-        console.log(this.listing)
-        let imageObj = response.data.imagePaths
-        for (let i = 0; i < 6; i++) {
-          if(/uploads*/.test(imageObj[`image_${i}`])) {
-            if(imageObj[`image_${i}`] != undefined && imageObj[`image_${i}`] != null ){
-              this.imagePaths.push(imageObj[`image_${i}`])
-            }
-          }
-        }
-        
-    } catch (error) {
-        console.log('Error occured')
-    }
-    if (this.imagePaths.length > 0) {
-      this.setImage()
-    }
+    this.fetchData()
+
     document.addEventListener('resize', () => {
      GoogleApi.googleMapsResize()
      })
+
     this.$nextTick(()=> {
       GoogleApi.googleSetSRC(this.listing)
     })
@@ -148,12 +130,12 @@ export default {
     document.removeEventListener('resize', () => {
      GoogleApi.googleMapsResize() 
     });
-},
+  },
   methods: {
     googleMapsDisplay(){
       GoogleApi.googleMapsDisplay()
     },
-      async bookmark(propertyId) {
+    async bookmark(propertyId) {
       let userId = this.$store.state.id
       if (userId === null || undefined || '') {
         return this.error = 'Login to bookmark'
@@ -178,6 +160,29 @@ export default {
           this.imagePosition = this.imagePosition + val
         }
       }
+    },
+    async fetchData(){
+      try {
+        let response = await PropertyServices.fetchById({
+        id: this.id
+        })
+        this.listing = response.data.property
+        console.log(this.listing)
+        let imageObj = response.data.imagePaths
+        for (let i = 0; i < 6; i++) {
+        if(/uploads*/.test(imageObj[`image_${i}`])) {
+          if(imageObj[`image_${i}`] != undefined && imageObj[`image_${i}`] != null ){
+            this.imagePaths.push(imageObj[`image_${i}`])
+          }
+        }
+        }
+
+      } catch (error) {
+        console.log('Error occured')
+        }
+        if (this.imagePaths.length > 0) {
+        this.setImage()
+        }
     }
   }
 }
