@@ -7,9 +7,24 @@
         <v-card-media
         id="media-card"
           v-bind:src="'http://localhost:8082/' + this.currentImage"
-          height="500px"
+          height="400px"
         >
+        
         </v-card-media>
+        <v-toolbar dense color="white" dark>
+         <v-btn color="white" class="btnx" id="leftbbb"
+          light small absolute 
+          @click="setImage(-1)"
+          top left fab>
+             <v-icon>keyboard_arrow_left</v-icon>
+          </v-btn>
+          <v-btn color="white" class="btnx" id="rightbbb"
+          light small 
+          @click="setImage(1)"
+          absolute top right fab>
+             <v-icon>keyboard_arrow_right</v-icon>
+          </v-btn>
+      </v-toolbar>
       </div>
       
     </v-flex>
@@ -40,18 +55,7 @@
 
         <v-card-actions>
 
-          <v-btn color="white" class="btnx" id="leftbbb"
-          light small absolute 
-          @click="changeImg(-1)"
-          top left fab>
-             <v-icon>keyboard_arrow_left</v-icon>
-          </v-btn>
-          <v-btn color="white" class="btnx" id="rightbbb"
-          light small 
-          @click="changeImg(1)"
-          absolute top right fab>
-             <v-icon>keyboard_arrow_right</v-icon>
-          </v-btn>
+         
 
           <v-btn color="primary" class="btnx" 
           v-if="this.$store.state.userLoggedIn"
@@ -118,7 +122,9 @@ export default {
         let imageObj = response.data.imagePaths
         for (let i = 0; i < 6; i++) {
           if(/uploads*/.test(imageObj[`image_${i}`])) {
-            this.imagePaths.push(imageObj[`image_${i}`])
+            if(imageObj[`image_${i}`] != undefined && imageObj[`image_${i}`] != null ){
+              this.imagePaths.push(imageObj[`image_${i}`])
+            }
           }
         }
         
@@ -126,7 +132,7 @@ export default {
         console.log('Error occured')
     }
     if (this.imagePaths.length > 0) {
-      this.changeImg()
+      this.setImage()
     }
     document.addEventListener('resize', () => {
      GoogleApi.googleMapsResize()
@@ -144,12 +150,20 @@ export default {
     googleMapsDisplay(){
       GoogleApi.googleMapsDisplay()
     },
-    changeImg(val){
+    setImage(val){
       this.currentImage = this.imagePaths[this.imagePosition]
-      if( this.imagePosition < this.imagePaths.length) {
-        this.imagePosition++
+      if (val > 0) {
+        if(this.imagePosition > this.imagePaths.length - 2) {
+          this.imagePosition = 0
+        } else {
+          this.imagePosition = this.imagePosition + val
+        }
       } else {
-        this.imagePosition = 0
+        if(this.imagePosition <= 0){
+          this.imagePosition = this.imagePaths.length - 1
+        } else {
+          this.imagePosition = this.imagePosition + val
+        }
       }
     }
   }
