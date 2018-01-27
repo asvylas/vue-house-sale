@@ -16,7 +16,7 @@
           </router-link>
         </v-toolbar>
 
-      <v-container fluid grid-list-md class="grey lighten-4">
+      <v-container fluid grid-list-md class="grey lighten-4 elevation-2">
         <v-layout row wrap>
           <v-flex
             v-for="property in listingList"
@@ -84,27 +84,34 @@ export default {
   },
   mounted(){
     this.getProperties ()
-    this.getBookmarks ()
     },
   methods: {
     async getProperties (){
       let response = await PropertyServices.fetchProperties()
       this.listings = response.data.property
       this.listingImages = response.data.image_list
+      this.getBookmarks ()
     },
     async getBookmarks(){
-      if(this.$store.state.id != null) {
-      let response = await BookmarkServices.getBookmarkedProperties(this.$store.state.id)
-      this.bookmarkList = this.listings
-      for(let i = 0; i < response.data.result.length; i++){
-        this.bookmarkList.forEach(element => {
-          if(element.id === response.data.result[i].id) {
-            element.bookmarked = true
+      if(this.$store.state.id != null || undefined) {
+        let response = await BookmarkServices.getBookmarkedProperties(this.$store.state.id)
+        this.bookmarkList = this.listings
+        if(response.data.result.length > 0){
+          for(let i = 0; i < response.data.result.length; i++){
+            this.bookmarkList.forEach(element => {
+              if(element.id === response.data.result[i].id) {
+                element.bookmarked = true
+              }
+            })
           }
-        })
+        } else {
+          this.listingList = this.listings
+        } 
         this.listingList = this.bookmarkList
-      }
-      console.log(this.listings)
+        console.log(this.listings)
+      } else {
+        this.listingList = this.listings
+        console.log(this.listings)
       }
     },
     async bookmark(propertyId) {

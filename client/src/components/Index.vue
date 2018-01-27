@@ -5,7 +5,7 @@
       justify-center
       class="white--text"
     >
-      <h1 class="white--text mb-2 display-1 text-xs-center">Looking for your new home?</h1>
+      <h1 class="black--text mb-2 display-1 text-xs-center">Looking for your new home?</h1>
       <v-btn
         class="primary lighten-2 mt-5"
         dark

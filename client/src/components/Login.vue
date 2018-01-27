@@ -1,7 +1,7 @@
 <template>
   <v-layout column class="mb-5">
     <v-flex xs6 offset-xs3>
-      <div class="white elevation-2" v-on:keyup.13="loginUser">
+      <div class="white elevation-5" v-on:keyup.13="loginUser">
         <v-toolbar flat dark dense class="primary">
           <v-toolbar-title>
             Login

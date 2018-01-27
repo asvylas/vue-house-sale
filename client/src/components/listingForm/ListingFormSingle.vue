@@ -58,13 +58,13 @@
            <v-container fluid>
               <v-layout row wrap>
                 <v-flex 
-                class="mb-5" 
+                class="mb-5 " 
                   v-for="image in imageURL"
                   :key="image">
                     
                       <img :src="image" 
                       alt="" height="200px"
-                      class="uploadImgs"
+                      class="uploadImgs elevation-2"
                       >
                     
               </v-flex>
