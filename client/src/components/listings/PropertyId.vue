@@ -57,12 +57,20 @@
 
          
 
-          <v-btn color="primary" class="btnx" 
-          v-if="this.$store.state.userLoggedIn"
-          dark small absolute top right fab
-          @click="()=>{this.bookmark(this.listing.id)}">
-             <v-icon>favorite</v-icon>
+          <!-- <v-btn fab small dark
+            v-if="property.bookmarked"
+            @click="bookmark(this.listing.id)"
+            color="red">
+            <v-icon dark>favorite</v-icon>
           </v-btn>
+
+          <v-btn fab small dark 
+            @click="bookmark(this.listing.id)"
+            v-else
+            color="primary">
+            <v-icon dark>favorite</v-icon>
+          </v-btn> -->
+
           <v-btn id="sharebtn" class="btnx" color="primary" dark small absolute top right fab>
              <v-icon>share</v-icon>
           </v-btn>
@@ -117,23 +125,21 @@ export default {
   mounted () {
     // Fetching data
     this.fetchData()
-
-    document.addEventListener('resize', () => {
-     GoogleApi.googleMapsResize()
-     })
-
+    window.addEventListener('resize', this.handleGoogleWindowOnResize)
     this.$nextTick(()=> {
       GoogleApi.googleSetSRC(this.listing)
+      
     })
   },
   beforeDestroy() {
-    document.removeEventListener('resize', () => {
-     GoogleApi.googleMapsResize() 
-    });
+    window.removeEventListener('resize', this.handleGoogleWindowOnResize)
   },
   methods: {
     googleMapsDisplay(){
       GoogleApi.googleMapsDisplay()
+    },
+    handleGoogleWindowOnResize(){
+      GoogleApi.googleMapsResize()
     },
     async bookmark(propertyId) {
       let userId = this.$store.state.id
