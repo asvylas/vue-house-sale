@@ -2,6 +2,7 @@ SEVN Stack application for listing and viewing properties: houses, apartments, o
 
 I'd love to hear any comments, insights or tips about my code or its quality.
 
+`````````````
 Front-end: Vuejs, Vuex, Vue-router, Vuetifyjs, Axios.
 Back-end: Node.js, Express, Axios, Bcryptjs, Sequelize, Multer.
 Database: SQLite.
@@ -13,7 +14,7 @@ client => 'npm run dev' Client will be running on port 8080
 server => 'npm run start' Server will be running po port 8082
 Client side will be missing a config.js file with Google API key, please use your own.
 
-`````````````
+
 Currently added:
 Registration and Login systems, hashed using bcryptjs.
 Authentication using jwt.
