@@ -119,7 +119,8 @@ export default {
       listing: '',
       imagePaths: [],
       currentImage: null,
-      imagePosition: 0
+      imagePosition: 0,
+      error: null
     }
   },
   mounted () {
@@ -173,7 +174,6 @@ export default {
         id: this.id
         })
         this.listing = response.data.property
-        console.log(this.listing)
         let imageObj = response.data.imagePaths
         for (let i = 0; i < 6; i++) {
         if(/uploads*/.test(imageObj[`image_${i}`])) {
@@ -184,7 +184,7 @@ export default {
         }
 
       } catch (error) {
-        console.log('Error occured')
+        this.error = 'Something unexpected happened.'
         }
         if (this.imagePaths.length > 0) {
         this.setImage()

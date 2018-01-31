@@ -108,10 +108,8 @@ export default {
           this.listingList = this.listings
         } 
         this.listingList = this.bookmarkList
-        console.log(this.listings)
       } else {
         this.listingList = this.listings
-        console.log(this.listings)
       }
     },
     async bookmark(propertyId) {

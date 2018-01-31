@@ -17,7 +17,7 @@ app.use('/uploads', express.static('uploads'))
 // Routesc
 require('./routes')(app)
 // Starting server
-sequelize.sync()
+sequelize.sync({force: true})
   .then(() => {
     app.listen(process.env.PORT || config.port, () => {
       console.log(`Server started on port: ${config.port}`)

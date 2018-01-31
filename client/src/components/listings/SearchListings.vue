@@ -34,9 +34,8 @@
             <v-card-actions>
                 <v-btn fab dark small color="primary" 
                 @click="() =>
-                {
-                $router.push(`/listings/${property.id}`)
-                }"><v-icon dark>pageview</v-icon></v-btn>
+                {$router.push(`/listings/${property.id}`)}"
+                ><v-icon dark>pageview</v-icon></v-btn>
             </v-card-actions>
           </v-card>
           </v-flex>
@@ -52,7 +51,8 @@ export default {
   data () {
     return {
       searchBar: '',
-      searchBarResult: ''
+      searchBarResult: '',
+      error: null
     }
   },
   methods: {
@@ -68,7 +68,7 @@ export default {
           this.searchBarResult = response.data.property
         }
       } catch (error){
-        console.log(error)
+        this.error = error
       }
     }
   }

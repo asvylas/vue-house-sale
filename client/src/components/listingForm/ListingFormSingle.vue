@@ -137,7 +137,6 @@ export default {
       })
       this.$router.push('/listings')
       } catch (error) {
-        console.log(error.response)
       }
     },
     Cancel(){
@@ -171,6 +170,8 @@ export default {
         description: this.description,
         listed_by_user: this.$store.state.user,
       }
+      // Binding context
+      const self = this
       const XHR = new XMLHttpRequest()
       const FD = new FormData()
       // Appending text
@@ -184,12 +185,13 @@ export default {
       XHR.open('POST', 'http://localhost:8082/properties', true)
       XHR.onload = function (e) {
       }
-      XHR.send(FD)
+      // Callback
       XHR.onreadystatechange = function () {
         if(XHR.readyState === XMLHttpRequest.DONE && XHR.status === 200) {
-          this.$router.push('/listings')
+          self.$router.push('/listings')
         }
       }
+      XHR.send(FD)
     }
   }
 }
