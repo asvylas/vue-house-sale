@@ -6,7 +6,7 @@ import Login from '@/components/Login'
 import Profile from '@/components/profile/Profile'
 import Listings from '@/components/listings/Listings'
 import ListingForm from '@/components/listingForm/ListingForm'
-import PropertyId from '@/components/listings/PropertyId'
+import PropertyId from '@/components/singleProperty/PropertyId'
 
 Vue.use(Router)
 

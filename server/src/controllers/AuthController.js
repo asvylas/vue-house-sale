@@ -20,7 +20,7 @@ module.exports = {
     try {
       await User.create(req.body)
       res.send({
-        msg: 'Registration successful, you will be redirected soon, please wait...'
+        msg: 'Registration successful, you will be redirected soon.'
       })
     } catch (err) {
       res.status(400).send({
@@ -42,14 +42,14 @@ module.exports = {
       })
       if (!user) {
         res.status(403).send({
-          error: 'Invalid email or password'
+          error: 'Invalid email or password.'
         })
       }
 
       let checkPassword = await user.comparePassword(password)
       if (checkPassword === false) {
         return res.status(403).send({
-          error: 'Invalid password'
+          error: 'Invalid email or password.'
         })
       }
 
@@ -67,7 +67,7 @@ module.exports = {
       })
     } catch (err) {
       res.status(500).send({
-        error: 'Something failed along the way'
+        error: 'Something failed along the way.'
       })
     }
   }

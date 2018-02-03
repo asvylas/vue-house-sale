@@ -119,7 +119,7 @@ export default {
       } else {
         let response = await BookmarkServices.bookmarkProperty(userId, propertyId)
         if(response.data.result === true) {
-          console.log('Update the UI DUMBASS')
+          this.error = 'It worked'
         }
       }
       this.getProperties ()

@@ -54,7 +54,7 @@
         </v-card-title>
 
         <v-card-actions>
-
+           <edit-dialog></edit-dialog>
          
 
           <!-- <v-btn fab small dark
@@ -74,11 +74,7 @@
           <v-btn id="sharebtn" class="btnx" color="primary" dark small absolute top right fab>
              <v-icon>share</v-icon>
           </v-btn>
-          <v-btn id="editbtn" class="btnx" color="primary" 
-            v-if="this.$store.state.user === this.listing.listed_by_user"
-            dark small absolute top right fab>
-             <v-icon>edit</v-icon>
-          </v-btn>
+         
             <v-btn id="placebtn"  class="btnx" color="primary" 
             dark small absolute
             @click='googleMapsDisplay' top right fab>
@@ -110,15 +106,19 @@
 import GoogleApi from '@/services/GoogleApi'
 import PropertyServices from '@/services/PropertyServices'
 import BookmarkServices from '@/services/BookmarkServices'
+import EditDialog from '@/components/singleProperty/dialogs/editDialog'
 export default {
   name: 'PropertyId',
+    components: {
+    EditDialog
+  },
   data () {
     return {
-      baseURL: 'http://localhost:8082/',
+      baseURL: 'http://localhost:8082',
       id: this.$store.state.route.params.propertyId,
       listing: '',
       imagePaths: [],
-      currentImage: null,
+      currentImage: './uploads/stock.jpg',
       imagePosition: 0,
       error: null
     }
@@ -127,10 +127,6 @@ export default {
     // Fetching data
     this.fetchData()
     window.addEventListener('resize', this.handleGoogleWindowOnResize)
-    this.$nextTick(()=> {
-      GoogleApi.googleSetSRC(this.listing)
-      
-    })
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.handleGoogleWindowOnResize)
@@ -148,8 +144,6 @@ export default {
         return this.error = 'Login to bookmark'
       } else {
         let response = await BookmarkServices.bookmarkProperty(userId, propertyId)
-        if(response.data.result === true) {
-        }
       }
     },
     setImage(val){
@@ -171,23 +165,23 @@ export default {
     async fetchData(){
       try {
         let response = await PropertyServices.fetchById({
-        id: this.id
+          id: this.id
         })
         this.listing = response.data.property
         let imageObj = response.data.imagePaths
         for (let i = 0; i < 6; i++) {
-        if(/uploads*/.test(imageObj[`image_${i}`])) {
-          if(imageObj[`image_${i}`] != undefined && imageObj[`image_${i}`] != null ){
-            this.imagePaths.push(imageObj[`image_${i}`])
+          if(/uploads*/.test(imageObj[`image_${i}`])) {
+            if(imageObj[`image_${i}`] != undefined && imageObj[`image_${i}`] != null ){
+              this.imagePaths.push(imageObj[`image_${i}`])
+            }
           }
         }
-        }
-
+        GoogleApi.googleSetSRC(this.listing)
       } catch (error) {
-        this.error = 'Something unexpected happened.'
+          this.error = 'Something unexpected happened.'
         }
         if (this.imagePaths.length > 0) {
-        this.setImage()
+          this.setImage()
         }
     }
   }

@@ -73,7 +73,6 @@ export default {
   async mounted () {
     let response = await BookmarkServices.getBookmarkedProperties(this.$store.state.id)
     this.bookmarkList = response.data.result
-    console.log(response)
   },
   methods: {
     async bookmark(propertyId) {

@@ -21,13 +21,11 @@
               v-model="password"
             ></v-text-field>
             <v-btn color="primary" @click="loginUser">Login</v-btn>
-
-            <v-alert color="warning" icon="priority_high" transition="scale-transition" :value="alert">
-              {{msg}}
-            </v-alert>
-
           </div>
         </div>
+        <v-alert color="warning" icon="priority_high" transition="scale-transition" :value="alert">
+          {{msg}}
+        </v-alert>
     </v-flex>
   </v-layout>
 </template>
@@ -56,7 +54,6 @@ export default {
             this.$store.dispatch('setUser', response.data.user)
             this.$store.dispatch('setId', response.data.id)
             this.$store.dispatch('setUserbookmarks', response.data.userBookmarks)
-            console.log(this.$store.state.userBookmarks)
             this.$router.push('/')
           } else {
             this.alert = true
@@ -83,5 +80,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+div.alert{
+  position: absolute;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-layout column class="mb-5">
+  <v-layout column fluid class="mb-5">
     <v-flex xs6 offset-xs3>
       <div class="white elevation-5" v-on:keyup.13="registerUser">
         <v-toolbar flat dark dense class="primary">
@@ -25,16 +25,14 @@
             <v-btn color="primary"
               @click="registerUser"
               >Submit</v-btn>
-        
-            <v-alert color="warning" icon="priority_high" transition="scale-transition" :value="alertError">
-              {{msgError}}
-            </v-alert>
-            <v-alert color="success" icon="check_circle" transition="scale-transition" :value="alertSuccess">
-              {{msgSuccess}}
-             </v-alert>  
            </div>
-
         </div>
+        <v-alert color="warning" icon="priority_high" transition="scale-transition" :value="alertError">
+          {{msgError}}
+        </v-alert>
+        <v-alert color="success" icon="check_circle" transition="scale-transition" :value="alertSuccess">
+          {{msgSuccess}}
+        </v-alert> 
     </v-flex>
   </v-layout>
 </template>
@@ -57,6 +55,10 @@ export default {
   watch: {
 
   },
+  mounted () {
+  },
+  beforeDestroyed () {
+  },
   methods: {
       async registerUser(){
         try {
@@ -68,7 +70,6 @@ export default {
           this.msgSuccess = response.data.msg
           this.alertSuccess = true
           this.disableField = true
-          console.log(this.msgSuccess, response.data.msg )
 
           if (response.data.msg) {
             setTimeout( ()=> {
@@ -92,4 +93,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+div.alert{
+  position: absolute;
+}
 </style>
