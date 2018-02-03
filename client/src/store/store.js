@@ -11,7 +11,8 @@ new Vuex.Store({
     id: null,
     token: null,
     userLoggedIn: false,
-    userBookmarks: null
+    userBookmarks: null,
+    loading: false
   },
   mutations: {
     setToken (state, token) {
@@ -36,6 +37,9 @@ new Vuex.Store({
       state.token = null
       state.userLoggedIn = false
       state.id = null
+    },
+    loading (state, loading) {
+      state.loading = loading
     }
   },
   actions: {
@@ -53,6 +57,9 @@ new Vuex.Store({
     },
     logoutUser ({commit}) {
       commit('logoutUser')
+    },
+    loading ({commit}, loading) {
+      commit('loading', loading)
     }
   }
 })

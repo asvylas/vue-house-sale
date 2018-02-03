@@ -20,7 +20,16 @@
               type="password"
               v-model="password"
             ></v-text-field>
-            <v-btn color="primary" @click="loginUser">Login</v-btn>
+
+            <v-btn color="primary" 
+              @click="loginUser"
+              :loading="this.$store.state.loading"
+              >Login
+              <span slot="loader" class="custom-loader">
+              <v-icon dark>cached</v-icon>
+              </span>
+            </v-btn>
+
           </div>
         </div>
         <v-alert color="warning" icon="priority_high" transition="scale-transition" :value="alert">
@@ -43,7 +52,8 @@ export default {
     }
   },
   methods: {
-          async loginUser(){
+      async loginUser(){
+        this.$store.dispatch('loading', true)
         try {
           const response = await AuthenticationService.login({
             email: this.email,
@@ -54,8 +64,10 @@ export default {
             this.$store.dispatch('setUser', response.data.user)
             this.$store.dispatch('setId', response.data.id)
             this.$store.dispatch('setUserbookmarks', response.data.userBookmarks)
+            this.$store.dispatch('loading', false)
             this.$router.push('/')
           } else {
+            this.$store.dispatch('loading', false)
             this.alert = true
             this.msg = 'Something went wrong'
 
@@ -68,7 +80,7 @@ export default {
           
           this.alert = true
           this.msg = error.response.data.error
-
+          this.$store.dispatch('loading', false)
           setTimeout(() => { 
             this.alert = false
            }, 3000);

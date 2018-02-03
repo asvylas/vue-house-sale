@@ -28,7 +28,7 @@
                 <v-text-field label="House number" hint="" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field label="Description" hint="" required></v-text-field>
+                <v-text-field label="Description" hint="" required>{{this.listing}}</v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -56,10 +56,12 @@
 <script>
 
 export default {
+  props : ['listing'],
   name: 'editDialog',
   data () {
     return {
-      dialog: false
+      dialog: false,
+      listing: this.listing,
     }
   },
   mounted () {

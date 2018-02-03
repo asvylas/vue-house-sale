@@ -22,9 +22,16 @@
               v-model="password"
               :disabled='disableField'
             ></v-text-field>
+
             <v-btn color="primary"
               @click="registerUser"
-              >Submit</v-btn>
+              :loading="this.$store.state.loading"
+              >Submit
+              <span slot="loader" class="custom-loader">
+              <v-icon dark>cached</v-icon>
+              </span>
+            </v-btn>
+
            </div>
         </div>
         <v-alert color="warning" icon="priority_high" transition="scale-transition" :value="alertError">
@@ -61,6 +68,7 @@ export default {
   },
   methods: {
       async registerUser(){
+        this.$store.dispatch('loading', true)
         try {
           const response = await AuthenticationService.register({
             email: this.email,
@@ -74,6 +82,7 @@ export default {
           if (response.data.msg) {
             setTimeout( ()=> {
               this.$router.push('/login')
+              this.$store.dispatch('loading', false)
             }, 3000)
           }
           
@@ -81,7 +90,7 @@ export default {
 
           this.alertError = true
           this.msgError = error.response.data.error
-
+          this.$store.dispatch('loading', false)
           setTimeout(() => { 
             this.alertError = false
            }, 3000);

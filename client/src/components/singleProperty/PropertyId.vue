@@ -54,22 +54,22 @@
         </v-card-title>
 
         <v-card-actions>
-           <edit-dialog></edit-dialog>
+           <edit-dialog :listing='this.listing'></edit-dialog>
          
 
-          <!-- <v-btn fab small dark
-            v-if="property.bookmarked"
-            @click="bookmark(this.listing.id)"
-            color="red">
+          <v-btn fab small dark class="bookmarkbtn"
+            v-if='this.bookmarked === true'
+            @click="bookmark(listing.id)" absolute
+            color="red" top  right>
             <v-icon dark>favorite</v-icon>
           </v-btn>
 
-          <v-btn fab small dark 
-            @click="bookmark(this.listing.id)"
-            v-else
-            color="primary">
+          <v-btn fab small dark class="bookmarkbtn"
+            @click="bookmark(listing.id)"
+            v-else absolute
+            color="black" top right>
             <v-icon dark>favorite</v-icon>
-          </v-btn> -->
+          </v-btn>
 
           <v-btn id="sharebtn" class="btnx" color="primary" dark small absolute top right fab>
              <v-icon>share</v-icon>
@@ -120,7 +120,8 @@ export default {
       imagePaths: [],
       currentImage: './uploads/stock.jpg',
       imagePosition: 0,
-      error: null
+      error: null,
+      bookmarked: false,
     }
   },
   mounted () {
@@ -144,6 +145,13 @@ export default {
         return this.error = 'Login to bookmark'
       } else {
         let response = await BookmarkServices.bookmarkProperty(userId, propertyId)
+        console.log(response.data.msg)
+        if(response.data.msg === 'Bookmarked.'){
+          this.bookmarked = true
+        } else {
+          this.bookmarked = false
+        }
+        console.log(this.bookmarked)
       }
     },
     setImage(val){
@@ -193,10 +201,11 @@ export default {
 v-card#media-card{
   height: 500px;
 }
+
 #sharebtn{
   margin-right: 52px;
 }
-#editbtn{
+.bookmarkbtn{
   margin-right: 102px;
 }
 #placebtn{
