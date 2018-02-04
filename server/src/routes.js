@@ -44,6 +44,9 @@ module.exports = (app) => {
   app.get('/properties',
     Properties.listAll)
 
+  app.patch('/properties',
+    Properties.updateListingById)
+
   app.post('/propertiesbyid',
     Properties.findPropertyById)
 

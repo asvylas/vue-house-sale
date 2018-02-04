@@ -93,9 +93,17 @@
                   label="Description"
                   multi-line
                   v-model="description"
-                ></v-text-field>
-          <v-btn color="primary" @click="sendData">Continue</v-btn>
+          ></v-text-field>
+
+          <v-btn color="primary" @click="sendData"
+          :loading="this.$store.state.loading"
+          >Submit
+          <span slot="loader" class="custom-loader">
+          <v-icon dark>cached</v-icon>
+          </span></v-btn>
+
           <v-btn flat @click='Cancel'>Cancel</v-btn>
+
         </v-stepper-content>
 
       </v-stepper>
@@ -118,7 +126,8 @@ export default {
       type: "",
       description: "",
       imageURL: [],
-      a: null
+      a: null,
+      loading: false
     }
   },
   methods: {
@@ -159,6 +168,7 @@ export default {
     },
     // Need to either add additional library to make this call or setup a crude error handling as is. ~
     sendData(){
+      this.$store.dispatch('loading', true)
       const filesToAppend = this.a
       const data = {
         name_of_listing: this.name,
@@ -188,6 +198,7 @@ export default {
       // Callback
       XHR.onreadystatechange = function () {
         if(XHR.readyState === XMLHttpRequest.DONE && XHR.status === 200) {
+          self.$store.dispatch('loading', false)
           self.$router.push('/listings')
         }
       }

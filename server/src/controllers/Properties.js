@@ -96,5 +96,21 @@ module.exports = {
         error: 'Not Found'
       })
     }
+  },
+  async updateListingById (req, res) {
+    try {
+      Property.update({
+
+      },
+      {
+        where: {
+          id: req.data.id
+        }
+      })
+    } catch (error) {
+      res.status(400).send({
+        error: 'Something went wrong.'
+      })
+    }
   }
 }
