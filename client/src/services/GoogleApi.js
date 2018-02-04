@@ -18,7 +18,6 @@ export default {
     }
   },
   googleSetSRC (location) {
-    console.log(location)
     const googleMapsWindow = document.getElementById('google-maps-view')
     googleMapsWindow.src = `https://www.google.com/maps/embed/v1/search?key=${ApiKeys.Keys.google}&q=${location.street}+${location.house_number},${location.city}`
   }

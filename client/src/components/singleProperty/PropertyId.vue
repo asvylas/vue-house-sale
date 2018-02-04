@@ -145,13 +145,11 @@ export default {
         return this.error = 'Login to bookmark'
       } else {
         let response = await BookmarkServices.bookmarkProperty(userId, propertyId)
-        console.log(response.data.msg)
         if(response.data.msg === 'Bookmarked.'){
           this.bookmarked = true
         } else {
           this.bookmarked = false
         }
-        console.log(this.bookmarked)
       }
     },
     setImage(val){

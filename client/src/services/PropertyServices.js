@@ -10,6 +10,9 @@ export default {
   searchProperties (options) {
     return Api().post('searchProperties', options)
   },
+  updateListingData (data) {
+    return Api().patch('properties', data)
+  },
   fetchById (id) {
     return Api().post('propertiesbyid', id)
   }

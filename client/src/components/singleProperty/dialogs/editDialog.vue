@@ -13,22 +13,36 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field label="Rename the property" hint="Make sure it's pretty." required></v-text-field>
+                <v-text-field label="Rename the property" 
+                hint="Make sure it's catchy." 
+                :value="listing.name_of_listing" 
+                @input.native="data.name_of_listing = $event.target.value"
+                required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6>
-                <v-text-field label="City" hint="" required></v-text-field>
+                <v-text-field label="City" 
+                hint="" 
+                :value="listing.city" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6>
-                <v-text-field label="Building type" hint="" required></v-text-field>
+                <v-text-field label="Building type" 
+                hint="" 
+                :value="listing.type_of_building" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6>
-                <v-text-field label="Street" hint="" required></v-text-field>
+                <v-text-field label="Street" 
+                hint="" 
+                :value="listing.street" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6>
-                <v-text-field label="House number" hint="" required></v-text-field>
+                <v-text-field label="House number" 
+                hint="" 
+                :value="listing.house_number" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field label="Description" hint="" required>{{this.listing}}</v-text-field>
+                <v-text-field label="Description" 
+                hint="" required 
+                :value="listing.description"></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -36,11 +50,13 @@
         </v-card-text>
         <v-card-actions>
           <v-flex>
+
             <v-btn color="primary" small dark 
             v-if="true"
-            @click.native="dialog = false"
+            @click.native="updateListingData"
             >Submit
             </v-btn>
+
             <v-btn color="primary" small dark 
             v-if="true"
             @click.native="dialog = false"
@@ -54,24 +70,27 @@
 </template>
 
 <script>
-
+import PropertyServices from '@/services/PropertyServices'
 export default {
   props : ['listing'],
   name: 'editDialog',
   data () {
     return {
       dialog: false,
-      listing: this.listing,
+      data: {}
     }
   },
   mounted () {
-
+    this.data = this.listing
   },
   beforeDestroy() {
 
   },
   methods: {
-
+    updateListingData() {
+      console.log(this.listing)
+      console.log(this.data)
+    }
   }
 }
 </script>
