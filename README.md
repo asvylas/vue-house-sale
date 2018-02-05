@@ -24,13 +24,12 @@ Simple query/search system for listings.
 Google Maps API to display listings.
 Tracked view counts on listings.
 Bookmarking with visual display in UI.
-User profile.
+User profile with tracked bookmarks.
 Fully implemented multi-image upload, front and back end.
+Animations, other UX features, more to add.
 
 To-do list:
 Protected API routes.
-Animations, other UX features.
-Flash out single listing page to actually show some meaningful info.
 Expand search.
 Visualise some dummy data with charts.js or D3.js.
 
