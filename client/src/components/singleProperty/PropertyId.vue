@@ -38,12 +38,12 @@
             <v-layout wrap>
               <v-flex class="text-sm-left">
                 <div>
-                  <h3 class="headline mb-0">{{this.listing.name_of_listing}}</h3>
-                  <span>City: {{this.listing.city}}</span><br>
-                  <span>Address: {{this.listing.street}}, {{this.listing.house_number}}</span><br>
-                  <span>Building type:{{this.listing.type_of_building}}</span><br>
-                  <span>Posted by:{{this.listing.listed_by_user}}</span><br>
-                  <span>Views: {{this.listing.listing_views}}</span>
+                  <h3 class="headline mb-0">{{listing.name_of_listing}}</h3>
+                  <span>City: {{listing.city}}</span><br>
+                  <span>Address: {{listing.street}}, {{this.listing.house_number}}</span><br>
+                  <span>Building type:{{listing.type_of_building}}</span><br>
+                  <span>Posted by:{{listing.listed_by_user}}</span><br>
+                  <span>Views: {{listing.listing_views}}</span>
                 </div>
               </v-flex>
 
@@ -54,9 +54,9 @@
         </v-card-title>
 
         <v-card-actions>
-           <edit-dialog :listing='this.listing'></edit-dialog>
-         
-
+           <edit-dialog v-if="listing !== ''" v-bind:listing='this.listing'>
+           </edit-dialog>
+        
           <v-btn fab small dark class="bookmarkbtn"
             v-if='this.bookmarked === true'
             @click="bookmark(listing.id)" absolute
@@ -122,14 +122,17 @@ export default {
       imagePosition: 0,
       error: null,
       bookmarked: false,
+      listingProp: {},
     }
   },
   mounted () {
     // Fetching data
     this.fetchData()
+    window.addEventListener('newListingRecieved', this.fetchData)
     window.addEventListener('resize', this.handleGoogleWindowOnResize)
   },
   beforeDestroy() {
+    window.removeEventListener('newListingRecieved', this.fetchData)
     window.removeEventListener('resize', this.handleGoogleWindowOnResize)
   },
   methods: {
@@ -174,6 +177,7 @@ export default {
           id: this.id
         })
         this.listing = response.data.property
+        this.listingProp = response.data.property
         let imageObj = response.data.imagePaths
         for (let i = 0; i < 6; i++) {
           if(/uploads*/.test(imageObj[`image_${i}`])) {

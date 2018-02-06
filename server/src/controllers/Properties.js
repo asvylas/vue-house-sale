@@ -98,14 +98,25 @@ module.exports = {
     }
   },
   async updateListingById (req, res) {
+    // console.log(req.body)
     try {
-      Property.update({
-
-      },
-      {
+      let listing = await Property.findOne({
         where: {
-          id: req.data.id
+          id: req.body.id
         }
+      })
+
+      let result = await listing.update({
+        name_of_listing: req.body.name_of_listing,
+        city: req.body.city,
+        type_of_building: req.body.type_of_building,
+        street: req.body.street,
+        house_number: req.body.house_number,
+        description: req.body.description
+      })
+
+      res.send({
+        listing: result
       })
     } catch (error) {
       res.status(400).send({
