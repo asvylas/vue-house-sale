@@ -117,7 +117,7 @@ export default {
       } else {
         let response = await PropertyServices.updateListingData(newData)
         if(response.data.listing) {
-          $emit('newListingRecieved')
+          this.$emit('newListingRecieved')
         }
       }
 

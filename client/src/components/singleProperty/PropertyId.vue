@@ -54,7 +54,7 @@
         </v-card-title>
 
         <v-card-actions>
-           <edit-dialog v-if="listing !== ''" v-bind:listing='this.listing'>
+           <edit-dialog v-if="listing !== ''" v-bind:listing='this.listing' @newListingRecieved="fetchNewData">
            </edit-dialog>
         
           <v-btn fab small dark class="bookmarkbtn"
@@ -171,6 +171,7 @@ export default {
         }
       }
     },
+    // Initial data fetch with image paths
     async fetchData(){
       try {
         let response = await PropertyServices.fetchById({
@@ -193,6 +194,17 @@ export default {
         if (this.imagePaths.length > 0) {
           this.setImage()
         }
+    },
+    // Second data fetch after edit succesful edit. ~
+    async fetchNewData(){
+      try {
+        let response = await PropertyServices.fetchById({
+          id: this.id
+        })
+        this.listing = response.data.property
+      } catch (error) {
+          this.error = 'Something unexpected happened.'
+      }
     }
   }
 }
