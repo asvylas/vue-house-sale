@@ -54,7 +54,7 @@
         </v-card-title>
 
         <v-card-actions>
-           <edit-dialog v-if="listing !== ''" v-bind:listing='this.listing' @newListingRecieved="fetchNewData">
+           <edit-dialog v-if="listing !== '' && listing.listed_by_user === this.$store.state.user" v-bind:listing='this.listing' @newListingRecieved="fetchNewData">
            </edit-dialog>
         
           <v-btn fab small dark class="bookmarkbtn"
