@@ -4,6 +4,7 @@ const {
 const {
   Images
 } = require('../models')
+const {checkJwt} = require('../controllers/AuthController')
 
 module.exports = {
   // Add a new property, if files are not attached/wrong type request rejects
@@ -98,27 +99,31 @@ module.exports = {
     }
   },
   async updateListingById (req, res) {
-    // console.log(req.body)
-    try {
-      let listing = await Property.findOne({
-        where: {
-          id: req.body.id
-        }
-      })
-
-      let result = await listing.update({
-        name_of_listing: req.body.name_of_listing,
-        city: req.body.city,
-        type_of_building: req.body.type_of_building,
-        street: req.body.street,
-        house_number: req.body.house_number,
-        description: req.body.description
-      })
-
-      res.send({
-        listing: result
-      })
-    } catch (error) {
+    console.log(req.body)
+    if (checkJwt(req.body.token)) {
+      try {
+        let listing = await Property.findOne({
+          where: {
+            id: req.body.id
+          }
+        })
+        let result = await listing.update({
+          name_of_listing: req.body.name_of_listing,
+          city: req.body.city,
+          type_of_building: req.body.type_of_building,
+          street: req.body.street,
+          house_number: req.body.house_number,
+          description: req.body.description
+        })
+        res.send({
+          listing: result
+        })
+      } catch (error) {
+        res.status(400).send({
+          error: 'Something went wrong.'
+        })
+      }
+    } else {
       res.status(400).send({
         error: 'Something went wrong.'
       })

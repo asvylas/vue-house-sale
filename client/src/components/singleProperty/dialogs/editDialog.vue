@@ -89,9 +89,6 @@ export default {
       newDescription: this.listing.description
     }
   },
-  mounted () {
-    console.log(this.listing.name_of_listing)
-  },
   methods: {
     async updateListingData() {
       // Creating X value for if 
@@ -103,7 +100,8 @@ export default {
         street: this.newStreet,
         house_number: this.newHouseNumber,
         description: this.newDescription,
-        id: this.listing.id
+        id: this.listing.id,
+        token: this.$store.state.token
       }
       // Checking object for empty values
       for(let item in newData) {

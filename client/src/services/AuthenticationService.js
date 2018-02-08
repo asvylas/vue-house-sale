@@ -10,7 +10,6 @@ export default {
   },
   sessionStoreLogin () {
     if (sessionStorage.getItem('token')) {
-      console.log(sessionStorage.getItem('token'))
       store.dispatch('setToken', sessionStorage.getItem('token'))
       store.dispatch('setUser', sessionStorage.getItem('user'))
       store.dispatch('setId', sessionStorage.getItem('id'))

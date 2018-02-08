@@ -70,5 +70,14 @@ module.exports = {
         error: 'Something failed along the way.'
       })
     }
+  },
+  checkJwt (token) {
+    try {
+      jwt.verify(token, config.authentication.jwtSecret)
+      return true
+    } catch (error) {
+      return false
+    }
   }
+
 }
