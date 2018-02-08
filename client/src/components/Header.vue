@@ -39,6 +39,7 @@
 
 <script>
 import PropertyServices from '@/services/PropertyServices'
+import AuthenticationService from '@/services/AuthenticationService'
 export default {
   name: 'Header',
   data () {
@@ -49,6 +50,12 @@ export default {
   props: {
       source: String
     },
+      created () {
+    if(AuthenticationService.sessionStoreLogin()) {
+      this.$store.dispatch('loading', false)
+      this.$router.push('/')
+    }
+  },
   methods: {
     async logoutUser(){
       this.$store.dispatch('logoutUser')

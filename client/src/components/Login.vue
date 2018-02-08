@@ -64,6 +64,9 @@ export default {
             this.$store.dispatch('setUser', response.data.user)
             this.$store.dispatch('setId', response.data.id)
             this.$store.dispatch('setUserbookmarks', response.data.userBookmarks)
+            for (let item in response.data) {
+              sessionStorage.setItem(item, response.data[item]) 
+            }
             this.$store.dispatch('loading', false)
             this.$router.push('/')
           } else {

@@ -37,6 +37,7 @@ new Vuex.Store({
       state.token = null
       state.userLoggedIn = false
       state.id = null
+      sessionStorage.clear()
     },
     loading (state, loading) {
       state.loading = loading

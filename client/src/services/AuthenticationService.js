@@ -1,4 +1,5 @@
 import Api from '@/services/Api'
+import store from '@/store/store'
 
 export default {
   register (credentials) {
@@ -6,5 +7,16 @@ export default {
   },
   login (credentials) {
     return Api().post('login', credentials)
+  },
+  sessionStoreLogin () {
+    if (sessionStorage.getItem('token')) {
+      console.log(sessionStorage.getItem('token'))
+      store.dispatch('setToken', sessionStorage.getItem('token'))
+      store.dispatch('setUser', sessionStorage.getItem('user'))
+      store.dispatch('setId', sessionStorage.getItem('id'))
+      return true
+    } else {
+      return false
+    }
   }
 }
