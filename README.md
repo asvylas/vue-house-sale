@@ -28,10 +28,10 @@ User profile with tracked bookmarks.
 New listings can now be added and updated by the user that added them.
 Fully implemented multi-image upload, front and back end.
 Animations, other UX features, more to add.
+Protected API route with JWT verification for editing listings.
 
 
 To-do list:
-Protected API routes.
 Expand search.
 Visualise some dummy data with charts.js or D3.js.
 
