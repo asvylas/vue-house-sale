@@ -25,8 +25,10 @@ Google Maps API to display listings.
 Tracked view counts on listings.
 Bookmarking with visual display in UI.
 User profile with tracked bookmarks.
+New listings can now be added and updated by the user that added them.
 Fully implemented multi-image upload, front and back end.
 Animations, other UX features, more to add.
+
 
 To-do list:
 Protected API routes.
