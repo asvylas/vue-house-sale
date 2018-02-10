@@ -1,6 +1,8 @@
 SEVN Stack application for listing and viewing properties: houses, apartments, others.
 
 I'd love to hear any comments, insights or tips about my code or its quality.
+Currently live server is running on, if it's down I'm probably fiddling with something: 
+http://174.138.9.241:8000/
 
 `````````````
 Front-end: Vuejs, Vuex, Vue-router, Vuetifyjs, Axios.
